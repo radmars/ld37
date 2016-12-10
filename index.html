@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<link rel='stylesheet' type='text/css' href='jquery-ui/jquery-ui.min.css' />
+		<link rel='stylesheet' type='text/css' href='jquery-ui/jquery-ui.structure.min.css' />
+		<link rel='stylesheet' type='text/css' href='jquery-ui/jquery-ui.theme.min.css' />
+		<link rel='stylesheet' type='text/css' href='styles.css' />
+		<title>RadOS 0.5</title>
+		<script src="jquery/jquery-3.1.1.min.js"></script>
+
+		<script src="jquery-ui/jquery-ui.min.js"></script>
+		<script>
+
+$( function() {
+
+	$( "#dialog-confirm" ).dialog({
+		resizable: false,
+		height: "auto",
+		width: 400,
+		modal: true,
+		/*
+		position: { my: "center center", at: "center center", of: $('#desktop-area') },
+		*/
+		buttons: {
+			"Delete all items": function() {
+				$( this ).dialog( "close" );
+			},
+			Cancel: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	});
+} );
+
+		</script>
+	</head>
+	<body>
+		<div class='desktop-area'>
+			<div id='irc-window' tabindex="-1" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front">
+				<div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ">
+					<span class="ui-dialog-title">RadNET IRC</span>
+					<button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close">
+						<span class="ui-button-icon ui-icon ui-icon-closethick"></span>
+						<span class="ui-button-icon-space"> </span>Close
+					</button>
+				</div>
+				<div id="irc-dialog" class="ui-dialog-content ui-widget-content" style="height: 200px;width: 600px; padding: 0px">
+					<pre>
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE
+@bob: ANYONE HERE</pre>
+				</div>
+			</div>
+
+			<div id="dialog-confirm" title="Empty the recycle bin?">
+				<p><span class="ui-icon ui-icon-alert" style="float:left;
+				margin:12px 12px 20px 0;"></span>These items will be
+			permanently deleted and cannot be recovered. Are you sure?</p>
+			</div>
+		</div>
+		<div class='start-bar'>
+			[start button]
+		</div>
+	</body>
+</html>

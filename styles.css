@@ -1,0 +1,29 @@
+body,html {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+.desktop-area {
+	flex: 1;
+}
+
+.start-bar {
+	border-top: 1px solid #ececec;
+	background: #ececec;
+	align-self: flex-end;
+	height: 32px;
+	width: 100%;
+}
+
+pre {
+	padding: 0;
+	margin: 0;
+	background-color: white;
+}
