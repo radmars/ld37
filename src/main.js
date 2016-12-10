@@ -89,7 +89,11 @@ $( function() {
 
 	window.gameState.downloader = new DownloadDialog()
 	window.gameState.addUpdater(window.gameState.downloader);
-	window.gameState.downloader.start("Kill_Bill.ram.mov", function() {
+	window.gameState.downloader.start("IRC Client.exe", function() {
+		window.gameState.downloader.extra("All done!");
+		window.setTimeout(function() {
+			window.gameState.downloader.close("close")
+		}, 1000);
 		console.log("Download finished");
 	});
 
