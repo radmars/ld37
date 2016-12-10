@@ -1,6 +1,20 @@
 "use strict"
 
-var ld37 = {}
+
+String.prototype.escapeHTML = function() {
+	var __entityMap = {
+		"&": "&amp;",
+		"<": "&lt;",
+		">": "&gt;",
+		'"': '&quot;',
+		"'": '&#39;',
+		"/": '&#x2F;'
+	};
+
+	return String(this).replace(/[&<>"'\/]/g, function (s) {
+		return __entityMap[s];
+	});
+}
 
 var user_index = 0
 
@@ -16,6 +30,22 @@ User.prototype.op = function() {
 
 var Room = function() {
 	this.users = []
+	this.messages = [];
+}
+
+Room.prototype.addMessage = function(user, message) {
+	this.messages.push({
+		user: user,
+		message: message,
+	});
+	var area = $('#chat-area')
+	area.append("<div class='chat-line'>" +
+			"[<span class='user-status'>" + user.status + "</span>" +
+			"<span class='user-name'>" + user.name + "</span>] " +
+			"<span class='message'>" + message.escapeHTML() + "</span>" +
+		"</div>"
+	);
+
 }
 
 Room.prototype.addUser = function(user) {
@@ -24,7 +54,6 @@ Room.prototype.addUser = function(user) {
 		"<span class='user-status'>" + user.status + "</span>" +
 		"<span class='user-name'>" + user.name + "</span></li>"
 	);
-
 }
 
 var Game = function() {
@@ -66,6 +95,11 @@ $( function() {
 	});
 
 	$('#fake-chat-button').click(function() {
+		var users = window.gameState.room.users
+		window.gameState.room.addMessage(
+			users[Math.floor(Math.random() * users.length)],
+			"hi"
+		);
 
 	});
 
