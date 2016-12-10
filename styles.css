@@ -5,13 +5,23 @@ body,html {
 	padding: 0;
 }
 
-body {
+.flex-column {
 	display: flex;
 	flex-direction: column;
 }
 
+.flex-row {
+	display: flex;
+	flex-flow: row nowrap;
+}
+
 .desktop-area {
 	flex: 1;
+}
+
+#irc-dialog {
+	align-content: flex-start;
+
 }
 
 .start-bar {
@@ -22,7 +32,12 @@ body {
 	width: 100%;
 }
 
-pre {
+#user-list {
+	font-family: monospace;
+	list-style-type: none;
+}
+
+#chat-area {
 	padding: 0;
 	margin: 0;
 	background-color: white;

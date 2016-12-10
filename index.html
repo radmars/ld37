@@ -8,69 +8,42 @@
 		<link rel='stylesheet' type='text/css' href='styles.css' />
 		<title>RadOS 0.5</title>
 		<script src="jquery/jquery-3.1.1.min.js"></script>
-
 		<script src="jquery-ui/jquery-ui.min.js"></script>
 		<script src='src/main.js'></script>
-		<script>
-
-
-$( function() {
-	$( "#irc-dialog").dialog({
-		closeOnEscape: false,
-		beforeClose: function() {
-			return false;
-		},
-	});
-
-	$( "#dialog-confirm" ).dialog({
-		resizable: false,
-		height: "auto",
-		width: 400,
-		modal: true,
-		autoOpen: false,
-		/*
-		position: { my: "center center", at: "center center", of: $('#desktop-area') },
-		*/
-		buttons: {
-			"Delete all items": function() {
-				$( this ).dialog( "close" );
-			},
-			Cancel: function() {
-				$( this ).dialog( "close" );
-			}
-		}
-	});
-} );
-
-		</script>
 	</head>
-	<body>
+	<body class='flex-column'>
 		<div class='desktop-area'>
-				<div id="irc-dialog" title="#radwarez on RadNet IRC network">
-					<div>
-						<pre>
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE</pre>
+			<div id="irc-dialog" title="#radwarez on RadNet IRC network" class='flex-row'>
+				<div id='chat-area'>
+					<div class='chat-line'>
+						<span class='user-status'>@</span><span class='user-name'>Bob</span>
+						<span class='message'>ANYONE HERE?</span>
 					</div>
+					<div class='join-line'>
+						User <span class='user-name'>Bob</span> joined <span
+						class='room-name'>#radwarez</span>
+					</div>
+				</div>
+				<div>
+					<button id='fake-join-button'>
+						Fake join
+					</button>
+					<button id='fake-chat-button'>
+						Fake chat
+					</button>
+
 					<ul id='user-list'>
 						<li>
-							<span class='user-status'>@</span>
-							<span class='user-name'>Bob</span>
+							<span class='user-status'>@</span><span class='user-name'>Bob</span>
 						</li>
 						<li>
-							<span class='user-status'>@</span>
-							<span class='user-name'>jim</span>
+							<span class='user-status'>@</span><span class='user-name'>jim</span>
 						</li>
 						<li>
-							<span class='user-status'>@</span>
-							<span class='user-name'>joe</span>
+							<span class='user-status'>&nbsp;</span><span class='user-name'>joe</span>
 						</li>
 					</ul>
+				</div>
 			</div>
 
 			<div id="dialog-confirm" title="Empty the recycle bin?">
