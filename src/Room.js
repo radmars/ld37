@@ -40,10 +40,16 @@ Room.prototype.op = function(user, by) {
 
 Room.prototype.removeUser = function(user) {
 	$('#' + user.id + '-user-entry').remove();
+	var i = this.users.indexOf(user);
+	if(i >= 0) {
+		this.users.splice(i, 1);
+	}
+	window.gameState.removeUpdater(user);
 }
 
 Room.prototype.addUser = function(user) {
 	this.users.push(user);
+	window.gameState.addUpdater(user);
 	var element = $("<li id='" + user.id + "-user-entry'>" +
 		user.nameString() +
 		" [<a href='#' class='kicker'>K/B</a>][<a href='#' class='opper'>op</a>]</li>"

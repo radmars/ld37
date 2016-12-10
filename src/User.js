@@ -43,13 +43,17 @@ var names = [
 	'lamer',
 ];
 
-
 var user_index = 0
 var User = function() {
 	this.id = user_index++
 	this.name = User.randomName();
 	this.status = ' ';
 	this.color = (new RColor()).get(true)
+	this.startChatTimer();
+}
+
+User.prototype.startChatTimer = function() {
+	this.chatTimer = Math.random() * 10000;
 }
 
 User.prototype.op = function() {
@@ -95,6 +99,16 @@ User.randomName = function() {
 		var postfix = User.randomElement(postfixes.filter(function(n) { return maxLength - prefix.length - n.length >= 0}));
 		var name = User.randomElement(names.filter(function(n) { return maxLength - prefix.length - postfix.length - n.length >= 0}));
 		return prefix+name+postfix;
+	}
+}
+
+User.prototype.update = function(time) {
+	if(this.chatTimer <= 0) {
+		window.gameState.room.addMessage(this, "Hello from " + Math.random());
+		this.startChatTimer();
+	}
+	else {
+		this.chatTimer -= time;
 	}
 }
 

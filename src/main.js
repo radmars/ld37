@@ -43,6 +43,17 @@ Game.prototype.start = function() {
 	window.requestAnimationFrame(this.updateCallback)
 }
 
+Game.prototype.addUpdater = function(u) {
+	this.updaters.push(u);
+}
+
+Game.prototype.removeUpdater = function(u) {
+	var i = this.updaters.indexOf(u);
+	if(i >= 0) {
+		this.updaters.splice(i, 1);
+	}
+}
+
 $( function() {
 
 	window.gameState = new Game()
@@ -77,7 +88,7 @@ $( function() {
 	});
 
 	window.gameState.downloader = new DownloadDialog()
-	window.gameState.updaters.push(window.gameState.downloader);
+	window.gameState.addUpdater(window.gameState.downloader);
 	window.gameState.downloader.start("Kill_Bill.ram.mov", function() {
 		console.log("Download finished");
 	});
