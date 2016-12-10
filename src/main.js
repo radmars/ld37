@@ -16,34 +16,6 @@ String.prototype.escapeHTML = function() {
 	});
 }
 
-var DownloadDialog = function() {
-	this.dialog = $( "#download-dialog" ).dialog({
-		resizable: false,
-		height: "auto",
-		width: 400,
-		modal: true,
-		autoOpen: true,
-	});
-	this.progress = $('.progress-bar', this.dialog).progressbar({value: 0});
-}
-
-DownloadDialog.prototype.start = function(file) {
-	this.total = 3000;
-	this.tracker = 0;
-	$('.filename', this.dialog).text(file);
-	this.progress.progressbar({value: this.tracker, max: this.total});
-}
-
-DownloadDialog.prototype.update = function(time) {
-	if(this.total > this.tracker) {
-		this.tracker += time;
-		this.progress.progressbar({value: this.tracker});
-		if(this.total <= this.tracker) {
-			console.log("Download finished");
-		}
-	}
-}
-
 var user_index = 0
 
 var User = function(name, status) {
@@ -81,6 +53,12 @@ Room.prototype.addUser = function(user) {
 	$('#user-list').append("<li id='" + user.id + "-user-entry'>" +
 		"<span class='user-status'>" + user.status + "</span>" +
 		"<span class='user-name'>" + user.name + "</span></li>"
+	);
+
+	var area = $('#chat-area');
+	area.append("<div class='join-line'>" +
+		"User <span class='user-name'>" + user.name + " </span> " +
+		"joined <span class='room-name'>#radwarez</span></div>"
 	);
 }
 
@@ -143,7 +121,9 @@ $( function() {
 
 	window.gameState.downloader = new DownloadDialog()
 	window.gameState.updaters.push(window.gameState.downloader);
-	window.gameState.downloader.start("Kill_Bill.ram.mov");
+	window.gameState.downloader.start("Kill_Bill.ram.mov", function() {
+		console.log("Download finished");
+	});
 
 	$( "#dialog-confirm" ).dialog({
 		resizable: false,
