@@ -1,5 +1,6 @@
 "use strict"
 
+var rcolor = new RColor();
 
 String.prototype.escapeHTML = function() {
 	var __entityMap = {
@@ -16,51 +17,6 @@ String.prototype.escapeHTML = function() {
 	});
 }
 
-var user_index = 0
-
-var User = function(name, status) {
-	this.id = user_index++
-	this.name = "RandomMook" + this.id
-	this.status = ' ';
-}
-
-User.prototype.op = function() {
-	this.status = '@'
-}
-
-var Room = function() {
-	this.users = []
-	this.messages = [];
-}
-
-Room.prototype.addMessage = function(user, message) {
-	this.messages.push({
-		user: user,
-		message: message,
-	});
-	var area = $('#chat-area')
-	area.append("<div class='chat-line'>" +
-			"[<span class='user-status'>" + user.status + "</span>" +
-			"<span class='user-name'>" + user.name + "</span>] " +
-			"<span class='message'>" + message.escapeHTML() + "</span>" +
-		"</div>"
-	);
-
-}
-
-Room.prototype.addUser = function(user) {
-	this.users.push(user);
-	$('#user-list').append("<li id='" + user.id + "-user-entry'>" +
-		"<span class='user-status'>" + user.status + "</span>" +
-		"<span class='user-name'>" + user.name + "</span></li>"
-	);
-
-	var area = $('#chat-area');
-	area.append("<div class='join-line'>" +
-		"User <span class='user-name'>" + user.name + " </span> " +
-		"joined <span class='room-name'>#radwarez</span></div>"
-	);
-}
 
 var Game = function() {
 	this.lastTime = 0
