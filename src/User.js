@@ -15,6 +15,7 @@ var prefixes = [
 	'mrs',
 	'ms',
 	'hot',
+	'SSJ-'
 ];
 
 var postfixes = [
@@ -27,9 +28,11 @@ var postfixes = [
 	'___',
 	'-o',
 	'pants',
+	'fan',
 ]
 
 var names = [
+	'anime',
 	'bong',
 	'rands',
 	'pants',
