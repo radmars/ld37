@@ -16,6 +16,34 @@ String.prototype.escapeHTML = function() {
 	});
 }
 
+var DownloadDialog = function() {
+	this.dialog = $( "#download-dialog" ).dialog({
+		resizable: false,
+		height: "auto",
+		width: 400,
+		modal: true,
+		autoOpen: true,
+	});
+	this.progress = $('.progress-bar', this.dialog).progressbar({value: 0});
+}
+
+DownloadDialog.prototype.start = function(file) {
+	this.total = 3000;
+	this.tracker = 0;
+	$('.filename', this.dialog).text(file);
+	this.progress.progressbar({value: this.tracker, max: this.total});
+}
+
+DownloadDialog.prototype.update = function(time) {
+	if(this.total > this.tracker) {
+		this.tracker += time;
+		this.progress.progressbar({value: this.tracker});
+		if(this.total <= this.tracker) {
+			console.log("Download finished");
+		}
+	}
+}
+
 var user_index = 0
 
 var User = function(name, status) {
@@ -57,9 +85,9 @@ Room.prototype.addUser = function(user) {
 }
 
 var Game = function() {
-	this.lastTime = +new Date()
+	this.lastTime = 0
 	this.updateCallback = this.update.bind(this)
-	this.updateable = []
+	this.updaters = []
 	this.room = new Room()
 }
 
@@ -68,7 +96,8 @@ Game.prototype.update = function(now) {
 	this.lastTime = now
 
 	// Do stuff.
-	this.updateable.forEach(function(u) {
+	this.updaters.forEach(function(u) {
+
 		u.update(delta)
 	});
 
@@ -111,6 +140,10 @@ $( function() {
 			return false;
 		},
 	});
+
+	window.gameState.downloader = new DownloadDialog()
+	window.gameState.updaters.push(window.gameState.downloader);
+	window.gameState.downloader.start("Kill_Bill.ram.mov");
 
 	$( "#dialog-confirm" ).dialog({
 		resizable: false,
