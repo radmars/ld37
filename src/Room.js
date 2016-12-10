@@ -5,23 +5,26 @@ var Room = function() {
 	this.messages = [];
 }
 
+Room.prototype.addInternal = function(text) {
+	var area = $('#chat-area')
+	area.append(text);
+	$('*', area).last().get(0).scrollIntoView();
+}
+
 Room.prototype.addMessage = function(user, message) {
 	this.messages.push({
 		user: user,
 		message: message,
 	});
-	var area = $('#chat-area')
-	area.append("<div class='chat-line'>" +
+	this.addInternal("<div class='chat-line'>" +
 			"[" + user.nameString() + "] " +
-			"<span class='message'>" + message.escapeHTML() + "</span>" +
+			"<span class='message' style='color: " + user.color + "'>" + message.escapeHTML() + "</span>" +
 		"</div>"
 	);
-
 }
 
 Room.prototype.kick = function(user, by) {
-	var area = $('#chat-area');
-	area.append("<div class='kick-line'>" +
+	this.addInternal("<div class='kick-line'>" +
 		"User " + user.nameString() +
 		" got booted from <span class='room-name'>#radwarez</span> by " +
 		by + "</div>"
@@ -30,12 +33,10 @@ Room.prototype.kick = function(user, by) {
 }
 
 Room.prototype.op = function(user, by) {
-	var area = $('#chat-area');
-	area.append("<div class='kick-line'>" +
+	this.addInternal("<div class='kick-line'>" +
 		"User " + user.nameString() +
 		" got ops from " + by + "</div>"
 	);
-	console.log("Opping" , user);
 }
 
 Room.prototype.removeUser = function(user) {

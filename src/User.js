@@ -47,7 +47,7 @@ var user_index = 0
 var User = function() {
 	this.id = user_index++
 	this.name = User.randomName();
-	this.status = ' ';
+	this.status = '&nbsp;';
 	this.color = (new RColor()).get(true)
 	this.startChatTimer();
 }
