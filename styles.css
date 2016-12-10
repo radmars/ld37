@@ -3,6 +3,7 @@ body,html {
 	width: 100%;
 	margin: 0;
 	padding: 0;
+	background-color: #282828;
 }
 
 .flex-column {
@@ -40,5 +41,15 @@ body,html {
 #chat-area {
 	padding: 0;
 	margin: 0;
-	background-color: white;
+	overflow: auto;
+	flex: 1;
+}
+
+#user-area {
+	border: 2px solid #282828;
+}
+
+#user-list {
+	padding: 5px;
+	border-top: 2px solid #282828;
 }

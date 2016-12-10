@@ -9,7 +9,7 @@ var User = function(name, status) {
 }
 
 User.prototype.op = function() {
-	this.status = '@'
+	this.status = '+'
 }
 
 User.prototype.nameString = function() {

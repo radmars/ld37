@@ -70,6 +70,7 @@ $( function() {
 		closeOnEscape: false,
 		minWidth: 500,
 		minHeight: 500,
+		height: 500,
 		beforeClose: function() {
 			return false;
 		},
