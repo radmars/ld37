@@ -10,15 +10,24 @@
 		<script src="jquery/jquery-3.1.1.min.js"></script>
 
 		<script src="jquery-ui/jquery-ui.min.js"></script>
+		<script src='src/main.js'></script>
 		<script>
 
+
 $( function() {
+	$( "#irc-dialog").dialog({
+		closeOnEscape: false,
+		beforeClose: function() {
+			return false;
+		},
+	});
 
 	$( "#dialog-confirm" ).dialog({
 		resizable: false,
 		height: "auto",
 		width: 400,
 		modal: true,
+		autoOpen: false,
 		/*
 		position: { my: "center center", at: "center center", of: $('#desktop-area') },
 		*/
@@ -37,41 +46,9 @@ $( function() {
 	</head>
 	<body>
 		<div class='desktop-area'>
-			<div id='irc-window' tabindex="-1" class="ui-dialog ui-corner-all ui-widget ui-widget-content ui-front">
-				<div class="ui-dialog-titlebar ui-corner-all ui-widget-header ui-helper-clearfix ">
-					<span class="ui-dialog-title">RadNET IRC</span>
-					<button type="button" class="ui-button ui-corner-all ui-widget ui-button-icon-only ui-dialog-titlebar-close" title="Close">
-						<span class="ui-button-icon ui-icon ui-icon-closethick"></span>
-						<span class="ui-button-icon-space"> </span>Close
-					</button>
-				</div>
-				<div id="irc-dialog" class="ui-dialog-content ui-widget-content" style="height: 200px;width: 600px; padding: 0px">
-					<pre>
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
-@bob: ANYONE HERE
+				<div id="irc-dialog" title="#radwarez on RadNet IRC network">
+					<div>
+						<pre>
 @bob: ANYONE HERE
 @bob: ANYONE HERE
 @bob: ANYONE HERE
@@ -79,7 +56,21 @@ $( function() {
 @bob: ANYONE HERE
 @bob: ANYONE HERE
 @bob: ANYONE HERE</pre>
-				</div>
+					</div>
+					<ul id='user-list'>
+						<li>
+							<span class='user-status'>@</span>
+							<span class='user-name'>Bob</span>
+						</li>
+						<li>
+							<span class='user-status'>@</span>
+							<span class='user-name'>jim</span>
+						</li>
+						<li>
+							<span class='user-status'>@</span>
+							<span class='user-name'>joe</span>
+						</li>
+					</ul>
 			</div>
 
 			<div id="dialog-confirm" title="Empty the recycle bin?">
