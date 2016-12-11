@@ -7,7 +7,7 @@ class UserLurker extends User {
 }
 
 // Load and parse our data files.
-$.get('/data/chat/lurker.yaml')
+$.get('/data/chat/Lurker.yaml')
 .done(function (data) {
 	UserLurker.prototype.ChatData = jsyaml.load(data);
 });
