@@ -42,16 +42,8 @@ class Room {
 	}
 
 	inviteRandomMook() {
-		var user;
-		if(Math.random() > .5) {
-			user = new User();
-		}
-		else {
-			user = new UserLurker();
-		}
-		if(Math.random() > .5) {
-			user.op();
-		}
+		var user = newCall([User, UserLurker, Kicker].randomElement());
+		user.op();
 		this.addUser(user);
 	}
 

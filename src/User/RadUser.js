@@ -2,10 +2,10 @@
 
 class RadUser extends User {
 	constructor() {
-		super();
-		this.name = "RADMARS";
+		super("RADMARS");
 		this.status = 3;
 	}
+
 	update() {
 	}
 }

@@ -2,6 +2,10 @@
 
 var rcolor = new RColor();
 
+function newCall(Cls) {
+	return new (Cls.bind.apply(Cls, arguments))();
+}
+
 Array.prototype.randomElement = function() {
 	if(this.length == 0) {
 		return '';

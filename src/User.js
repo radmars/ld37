@@ -63,12 +63,13 @@ var status_name = [
 var user_index = 0
 
 class User {
-	constructor() {
+	constructor(name) {
 		this.id = user_index++
-		this.name = User.randomName();
+		this.name = name || User.randomName();
 		this.status = 0;
 		this.color = (new RColor()).get(true)
 		this.startChatTimer();
+		console.log(this.name, " is a ", this.constructor.name);
 	}
 
 	startChatTimer() {
