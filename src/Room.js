@@ -20,7 +20,7 @@ class Room {
 			},
 		});
 
-		this.player= player;
+		this.player = player;
 
 		this.users = []
 		this.downloader = downloader;
@@ -32,6 +32,8 @@ class Room {
 		list.on('click', '.kicker',  userControlEvent.bind(null, this, 'kick'));
 		list.on('click', '.deopper', userControlEvent.bind(null, this, 'deop'));
 		list.on('click', '.opper',   userControlEvent.bind(null, this, 'op'));
+
+		this._addUser(player);
 	}
 
 	startDownload(e) {
@@ -44,7 +46,7 @@ class Room {
 	inviteRandomMook() {
 		var user = newCall([User, UserLurker, UserTroll, Kicker].randomElement());
 		user.op();
-		this.addUser(user);
+		this._addUser(user);
 	}
 
 	show() {
@@ -52,7 +54,7 @@ class Room {
 
 	}
 
-	addInternal(text) {
+	_addInternal(text) {
 		var area = $('#chat-area')
 
 		var scroll = area[0].scrollHeight - area.scrollTop() - area.outerHeight() < 1;
@@ -66,10 +68,18 @@ class Room {
 		}
 	}
 
+	notifyUsers(event, args) {
+		var users = this.users.slice
+		for(var i = 0; i < users.length; i++) {
+			users[i][event].call(users[i], args);
+		}
+	}
+
 	addMessage(user, message) {
 		var spaces = "&nbsp;".repeat(11 - user.name.length);
 
-		this.addInternal(
+		
+		this._addInternal(
 			jQuery("<div class='chat-line'></div>")
 			.append("[" + spaces + user.nameString() + "] ")
 			.append(
@@ -77,22 +87,26 @@ class Room {
 				.append(message)
 			)
 		);
+
+		this.notifyUsers('onChatMessage', user, message);
 	}
 
 	kick(by, user) {
-		this.addInternal("<div class='kick-line'>" +
+		this._addInternal("<div class='kick-line'>" +
 			"User " + user.nameString() +
 			" got booted from <span class='room-name'>#radwarez</span> by " + by.nameString() + "</div>"
 		);
-		this.removeUser(user);
+		this._removeUser(user);
+		this.notifyUsers('onKick', by, user);
 	}
 
 	op(by, user) {
 		user.op();
-		this.addInternal("<div class='op-line'>" +
+		this._addInternal("<div class='op-line'>" +
 			"User " + user.nameString() +
 			" got promoted to " + user.statusName() + " status by " + by.nameString() + "</div>"
 		);
+
 		// If we're changing the local player then, well, we have to refresh the
 		// whole list.
 		if(user == this.player) {
@@ -102,11 +116,13 @@ class Room {
 			this.updateUserListItem(user);
 		}
 		this.sortUserList();
+
+		this.notifyUsers('onOp', by, user);
 	}
 
 	deop(by, user) {
 		user.deop();
-		this.addInternal("<div class='deop-line'>" +
+		this._addInternal("<div class='deop-line'>" +
 			"User " + user.nameString() +
 			" got demoted to " + user.statusName() + " status by " + by.nameString() + "</div>"
 		);
@@ -120,6 +136,7 @@ class Room {
 			this.updateUserListItem(user);
 		}
 		this.sortUserList();
+		this.notifyUsers('onDeop', by, user);
 	}
 
 	refreshUserList() {
@@ -135,7 +152,7 @@ class Room {
 		);
 	}
 
-	removeUser(user) {
+	_removeUser(user) {
 		$('#' + user.id + '-user-entry').remove();
 		var i = this.users.indexOf(user);
 		if(i >= 0) {
@@ -154,7 +171,20 @@ class Room {
 				"</span>" : "");
 	}
 
-	addUser(user) {
+	leave(user) {
+		this._removeUser(user);
+		this._addInternal(
+			jQuery("<div class='leave-line'></div>")
+			.append(
+				"User " + user.nameString() +
+				" left <span class='room-name'>#radwarez</span>"
+			)
+		);
+
+		this.notifyUsers('onLeave', user);
+	}
+
+	_addUser(user) {
 		this.users.push(user);
 		window.gameState.addUpdater(user);
 		var element = $("<li id='" + user.id + "-user-entry'>" +
@@ -168,7 +198,7 @@ class Room {
 		list.append(element)
 		this.sortUserList();
 
-		this.addInternal(
+		this._addInternal(
 			jQuery("<div class='join-line'></div>")
 			.append(
 				"User " + user.nameString() +

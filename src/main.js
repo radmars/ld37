@@ -33,15 +33,6 @@ String.prototype.escapeHTML = function() {
 }
 
 var Game = function() {
-	this.lastTime = 0
-	this.updateCallback = this.update.bind(this)
-	this.updaters = []
-
-	this.player = new RadUser();
-	this.desktop = new Desktop()
-	this.downloader = new DownloadDialog(this.desktop)
-	this.addUpdater(this.downloader);
-	this.room = new Room(this.player, this.downloader);
 }
 
 Game.prototype.update = function(now) {
@@ -58,7 +49,16 @@ Game.prototype.update = function(now) {
 }
 
 Game.prototype.start = function() {
-	this.room.addUser(this.player);
+	this.lastTime = 0
+	this.updateCallback = this.update.bind(this)
+	this.updaters = []
+
+	this.player = new RadUser();
+	this.desktop = new Desktop()
+	this.downloader = new DownloadDialog(this.desktop)
+	this.addUpdater(this.downloader);
+	this.room = new Room(this.player, this.downloader);
+
 	this.room.show();
 	window.requestAnimationFrame(this.updateCallback)
 }

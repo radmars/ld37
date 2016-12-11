@@ -72,6 +72,31 @@ class User {
 		console.log(this.name, " is a ", this.constructor.name);
 	}
 
+	// This is ONLY called on the person who just got kicked out, after they get
+	// kicked.
+	onDestroyBooted() {
+	}
+
+	// note html probably in message. everyone gets this.
+	onChatMessage(user, message) {
+	}
+
+	// User who got kicked doesn't get this. They're already gone.
+	onKick(by, user) {
+	}
+
+	// Everyone gets this.
+	onOp(by, user) {
+	}
+
+	// Everyone gets this.
+	onDeop(by, user) {
+	}
+
+	// User who left does not get this, they're already gone.
+	onLeave(user) {
+	}
+
 	startChatTimer() {
 		this.chatTimer = Math.random() * 10000;
 	}
