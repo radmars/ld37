@@ -23,6 +23,7 @@ var Game = function() {
 	this.updateCallback = this.update.bind(this)
 	this.updaters = []
 	this.room = new Room()
+	this.desktop = new Desktop()
 }
 
 Game.prototype.update = function(now) {
@@ -58,6 +59,18 @@ $( function() {
 
 	window.gameState = new Game()
 	window.gameState.start()
+
+	window.gameState.downloader = new DownloadDialog()
+	window.gameState.addUpdater(window.gameState.downloader);
+	window.gameState.downloader.start("IRC Client.exe", function() {
+		window.gameState.downloader.extra("All done!");
+		window.setTimeout(function() {
+			window.gameState.room.show();
+			window.gameState.downloader.close("close")
+		}, 1000);
+		console.log("Download finished");
+	});
+
 	// Testing stuff
 	$('#fake-join-button').click(function() {
 		var user = new User();
@@ -75,15 +88,18 @@ $( function() {
 		);
 	});
 
-	window.gameState.downloader = new DownloadDialog()
-	window.gameState.addUpdater(window.gameState.downloader);
-	window.gameState.downloader.start("IRC Client.exe", function() {
-		window.gameState.downloader.extra("All done!");
-		window.setTimeout(function() {
-			window.gameState.room.show();
-			window.gameState.downloader.close("close")
-		}, 1000);
-		console.log("Download finished");
+	$('#fake-download').click(function() {
+		var file = new File("hello_world.exe", "img/key_icon.png");
+		window.gameState.downloader.start(file.name, function() {
+			window.gameState.desktop.addFile(file);
+			window.gameState.downloader.extra("All done!");
+			window.setTimeout(function() {
+				window.gameState.room.show();
+				window.gameState.downloader.close("close")
+			}, 1000);
+
+		});
 	});
+
 } );
 

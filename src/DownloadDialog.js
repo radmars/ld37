@@ -15,6 +15,7 @@ var DownloadDialog = function() {
 DownloadDialog.prototype.start = function(file, callback) {
 	this.total = 3000;
 	this.tracker = 0;
+	this.dialog.dialog('open');
 	$('.filename', this.dialog).text(file);
 	this.progress.progressbar({value: this.tracker, max: this.total});
 	this.oncomplete = callback

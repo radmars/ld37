@@ -4,6 +4,7 @@ body,html {
 	margin: 0;
 	padding: 0;
 	background-color: #282828;
+	font-family: monospace;
 }
 
 a:hover {
@@ -57,4 +58,15 @@ a:hover {
 
 #user-list .controls {
 	float: right;
+}
+
+.launcher {
+	text-align: center;
+	width: 132px;
+	color: white;
+	margin: 10px;
+}
+
+.launcher:hover {
+	background-color: #5c5c5c;
 }
