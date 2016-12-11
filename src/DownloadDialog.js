@@ -6,6 +6,7 @@ var DownloadDialog = function() {
 		height: "auto",
 		width: 400,
 		modal: true,
+		appendTo: $('.desktop-area'),
 		autoOpen: true,
 	});
 	this.progress = $('.progress-bar', this.dialog).progressbar({value: 0});

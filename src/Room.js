@@ -1,13 +1,31 @@
 "use strict"
 
 var Room = function() {
+	this.dialog = $( "#irc-dialog").dialog({
+		closeOnEscape: false,
+		minWidth: 500,
+		minHeight: 500,
+		height: 500,
+		autoOpen: false,
+		appendTo: $('.desktop-area'),
+		beforeClose: function() {
+			return false;
+		},
+	});
+
 	this.users = []
 	this.messages = [];
+}
+
+Room.prototype.show = function() {
+	this.dialog.dialog("open");
+
 }
 
 Room.prototype.addInternal = function(text) {
 	var area = $('#chat-area')
 	area.append(text);
+	jQuery('*:lt(-500)', area).remove()
 	$('*', area).last().get(0).scrollIntoView();
 }
 

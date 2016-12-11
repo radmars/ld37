@@ -58,7 +58,6 @@ $( function() {
 
 	window.gameState = new Game()
 	window.gameState.start()
-
 	// Testing stuff
 	$('#fake-join-button').click(function() {
 		var user = new User();
@@ -74,17 +73,6 @@ $( function() {
 			users[Math.floor(Math.random() * users.length)],
 			"hi"
 		);
-
-	});
-
-	$( "#irc-dialog").dialog({
-		closeOnEscape: false,
-		minWidth: 500,
-		minHeight: 500,
-		height: 500,
-		beforeClose: function() {
-			return false;
-		},
 	});
 
 	window.gameState.downloader = new DownloadDialog()
@@ -92,28 +80,10 @@ $( function() {
 	window.gameState.downloader.start("IRC Client.exe", function() {
 		window.gameState.downloader.extra("All done!");
 		window.setTimeout(function() {
+			window.gameState.room.show();
 			window.gameState.downloader.close("close")
 		}, 1000);
 		console.log("Download finished");
-	});
-
-	$( "#dialog-confirm" ).dialog({
-		resizable: false,
-		height: "auto",
-		width: 400,
-		modal: true,
-		autoOpen: false,
-		/*
-		position: { my: "center center", at: "center center", of: $('#desktop-area') },
-		*/
-		buttons: {
-			"Delete all items": function() {
-				$( this ).dialog( "close" );
-			},
-			Cancel: function() {
-				$( this ).dialog( "close" );
-			}
-		}
 	});
 } );
 
