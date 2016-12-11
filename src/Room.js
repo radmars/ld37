@@ -24,9 +24,16 @@ Room.prototype.show = function() {
 
 Room.prototype.addInternal = function(text) {
 	var area = $('#chat-area')
+
+	var scroll = area[0].scrollHeight - area.scrollTop() - area.outerHeight() < 1;
+
 	area.append(text);
+
+	// Only keep last 500
 	jQuery('*:lt(-500)', area).remove()
-	$('*', area).last().get(0).scrollIntoView();
+	if(scroll) {
+		$('*', area).last().get(0).scrollIntoView();
+	}
 }
 
 Room.prototype.addMessage = function(user, message) {
