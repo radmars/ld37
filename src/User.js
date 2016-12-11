@@ -85,38 +85,43 @@ User.prototype.nameString = function() {
 		"<span class='user-name'>" + this.name + "</span></span>";
 }
 
-User.randomElement = function(array) {
-	if(array.length == 0) {
-		return '';
-	}
-	return array[Math.floor(Math.random() * array.length)];
-}
-
 User.randomName = function() {
 	var basis = Math.floor(Math.random() * 10);
 	var maxLength = 10;
 
 	// no mods
 	if(basis < 3) {
-		return User.randomElement(names);
+		return names.randomElement();
 	}
 	// just a prefix
 	else if(basis < 5) {
-		var prefix = User.randomElement(prefixes);
-		var name = User.randomElement(names.filter(function(n) { return maxLength - prefix.length - n.length >= 0 }));
+		var prefix = prefixes.randomElement();
+
+		var name = names.filter(function(n) {
+			return maxLength - prefix.length - n.length >= 0
+		}).randomElement();
+
 		return prefix + name;
 	}
 	// just a postfix
 	else if(basis < 8) {
-		var postfix = User.randomElement(postfixes);
-		var name = User.randomElement(names.filter(function(n) { return maxLength - postfix.length - n.length >= 0}));
+		var postfix = postfixes.randomElement();
+		var name = names.filter(function(n) {
+			return maxLength - postfix.length - n.length >= 0;
+		}).randomElement();
 		return name+postfix;
 	}
 	// both!!
 	else {
-		var prefix = User.randomElement(prefixes);
-		var postfix = User.randomElement(postfixes.filter(function(n) { return maxLength - prefix.length - n.length >= 0}));
-		var name = User.randomElement(names.filter(function(n) { return maxLength - prefix.length - postfix.length - n.length >= 0}));
+		var prefix = prefixes.randomElement();
+		var postfix = postfixes.filter(function(n) {
+			return maxLength - prefix.length - n.length >= 0;
+		}).randomElement();
+
+		var name = names.filter(function(n) {
+			return maxLength - prefix.length - postfix.length - n.length >= 0;
+		}).randomElement();
+
 		return prefix+name+postfix;
 	}
 }
@@ -126,8 +131,7 @@ User.prototype.banter = function() {
 		this.ChatData
 		&& this.ChatData.banter
 	) {
-
-		return User.randomElement(this.ChatData.banter);
+		return this.ChatData.banter.randomElement();
 	}
 	else {
 		return "Hello from " + Math.random();

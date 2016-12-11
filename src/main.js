@@ -2,6 +2,13 @@
 
 var rcolor = new RColor();
 
+Array.prototype.randomElement = function() {
+	if(this.length == 0) {
+		return '';
+	}
+	return this[Math.floor(Math.random() * this.length)];
+}
+
 String.prototype.escapeHTML = function() {
 	var __entityMap = {
 		"&": "&amp;",
@@ -87,7 +94,7 @@ $( function() {
 	});
 
 	$('#fake-download').click(function() {
-		var file = new File("hello_world.exe", "img/key_icon.png");
+		var file = File.generateNewFile();
 		window.gameState.downloader.start(file.name, function() {
 			window.gameState.desktop.addFile(file);
 			window.gameState.downloader.extra("All done!");
