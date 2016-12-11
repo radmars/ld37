@@ -71,7 +71,10 @@ Room.prototype.addUser = function(user) {
 	window.gameState.addUpdater(user);
 	var element = $("<li id='" + user.id + "-user-entry'>" +
 		user.nameString() +
-		" [<a href='#' class='kicker'>K/B</a>][<a href='#' class='opper'>op</a>]</li>"
+		" <span class='controls'>" +
+		"[<a href='#' class='kicker'>K/B</a>]" +
+		"[<a href='#' class='opper'>op</a>]" +
+		"</span></li>"
 	);
 
 	jQuery('.kicker', element).click(this.kick.bind(this, user, "RadMars"));
