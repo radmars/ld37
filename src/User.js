@@ -126,7 +126,26 @@ User.randomName = function() {
 	}
 }
 
+User.prototype.createFileDownloadElement = function(file) {
+	var e = jQuery("<span></span>")
+		.append("<span class='file-name'>" + file.name + "</span>")
+		.append(" [<a href='#' class='downloader'>download</a>]"
+	);
+
+	jQuery.data(e[0], "file", file);
+	return e;
+}
+
 User.prototype.banter = function() {
+	if(Math.random() < .10) {
+		var el = this.createFileDownloadElement(File.generateNewFile());
+		var msg = jQuery("<span></span>")
+			.append("DUDERS I have ")
+			.append(el)
+			.append(" if you want it!!!");
+		return msg;
+	}
+
 	if(
 		this.ChatData
 		&& this.ChatData.banter
@@ -134,7 +153,7 @@ User.prototype.banter = function() {
 		return this.ChatData.banter.randomElement();
 	}
 	else {
-		return "Hello from " + Math.random();
+		return jQuery("<span>Hello from " + Math.random() + "</span>");
 	}
 }
 

@@ -1,6 +1,6 @@
 "use strict"
 
-var Room = function() {
+var Room = function(downloader) {
 	this.dialog = $( "#irc-dialog").dialog({
 		closeOnEscape: false,
 		minWidth: 500,
@@ -16,8 +16,17 @@ var Room = function() {
 
 	this.users = []
 	this.messages = [];
+	this.downloader = downloader;
 
 	this.dialog.on('click', '.inviter', this.inviteRandomMook.bind(this));
+	this.dialog.on('click', '.downloader', this.startDownload.bind(this));
+}
+
+Room.prototype.startDownload = function(e) {
+	var file = jQuery.data(e.target.parentElement, "file");
+	this.downloader.start(file, function() {
+	});
+	jQuery(e.target).replaceWith("DOWNLOADED!");
 }
 
 Room.prototype.inviteRandomMook = function() {
@@ -58,10 +67,14 @@ Room.prototype.addMessage = function(user, message) {
 		user: user,
 		message: message,
 	});
-	this.addInternal("<div class='chat-line'>" +
-			"[" + user.nameString() + "] " +
-			"<span class='message' style='color: " + user.color + "'>" + message.escapeHTML() + "</span>" +
-		"</div>"
+
+	this.addInternal(
+		jQuery("<div class='chat-line'></div>")
+			.append("[" + user.nameString() + "] ")
+			.append(
+				jQuery("<span class='message' style='color: " + user.color + "'></span>")
+					.append(message)
+			)
 	);
 }
 
@@ -128,9 +141,11 @@ Room.prototype.addUser = function(user) {
 		return u1.compare(u2);
 	}).appendTo(list);
 
-	var area = $('#chat-area');
-	area.append("<div class='join-line'>" +
-		"User " + user.nameString() +
-		" joined <span class='room-name'>#radwarez</span></div>"
+	this.addInternal(
+		jQuery("<div class='join-line'></div>")
+			.append(
+				"User " + user.nameString() +
+				" joined <span class='room-name'>#radwarez</span>"
+			)
 	);
 }

@@ -28,8 +28,11 @@ var Game = function() {
 	this.lastTime = 0
 	this.updateCallback = this.update.bind(this)
 	this.updaters = []
-	this.room = new Room()
+
 	this.desktop = new Desktop()
+	this.downloader = new DownloadDialog(this.desktop)
+	this.addUpdater(this.downloader);
+	this.room = new Room(this.downloader);
 }
 
 Game.prototype.update = function(now) {
@@ -38,7 +41,6 @@ Game.prototype.update = function(now) {
 
 	// Do stuff.
 	this.updaters.forEach(function(u) {
-
 		u.update(delta)
 	});
 
@@ -47,6 +49,7 @@ Game.prototype.update = function(now) {
 }
 
 Game.prototype.start = function() {
+	this.room.show();
 	window.requestAnimationFrame(this.updateCallback)
 }
 
@@ -66,17 +69,9 @@ $( function() {
 	window.gameState = new Game()
 	window.gameState.start()
 
-	window.gameState.room.show();
-	window.gameState.downloader = new DownloadDialog()
-	window.gameState.addUpdater(window.gameState.downloader);
 	/*
 	window.gameState.downloader.start("IRC Client.exe", function() {
-		window.gameState.downloader.extra("All done!");
-		window.setTimeout(function() {
-			window.gameState.room.show();
-			window.gameState.downloader.close("close")
-		}, 1000);
-		console.log("Download finished");
+		window.gameState.room.show();
 	});
 	*/
 
@@ -86,23 +81,14 @@ $( function() {
 	});
 
 	$('#fake-chat-button').click(function() {
-		var users = window.gameState.room.users
-		window.gameState.room.addMessage(
-			users[Math.floor(Math.random() * users.length)],
-			"hi"
-		);
+		var user = window.gameState.room.users.randomElement();
+		window.gameState.room.addMessage( user, user.banter() );
 	});
 
 	$('#fake-download').click(function() {
 		var file = File.generateNewFile();
-		window.gameState.downloader.start(file.name, function() {
+		window.gameState.downloader.start(file, function() {
 			window.gameState.desktop.addFile(file);
-			window.gameState.downloader.extra("All done!");
-			window.setTimeout(function() {
-				window.gameState.room.show();
-				window.gameState.downloader.close("close")
-			}, 1000);
-
 		});
 	});
 
