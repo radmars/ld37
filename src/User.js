@@ -46,11 +46,17 @@ var names = [
 	'lamer',
 ];
 
+var status_names = [
+	'&nbsp;',
+	'+',
+	'!',
+];
+
 var user_index = 0
 var User = function() {
 	this.id = user_index++
 	this.name = User.randomName();
-	this.status = '&nbsp;';
+	this.status = 0;
 	this.color = (new RColor()).get(true)
 	this.startChatTimer();
 }
@@ -60,12 +66,22 @@ User.prototype.startChatTimer = function() {
 }
 
 User.prototype.op = function() {
-	this.status = '+'
+	this.status = 1;
+}
+
+User.prototype.compare = function(other) {
+	if(this.status > other.status) {
+		return -1;
+	}
+	else if(this.status == other.status) {
+		return this.name > other.name ? 1 : (this.name == other.name  ? 0 : - 1)
+	}
+	return 1;
 }
 
 User.prototype.nameString = function() {
 	return "<span style='color: "+ this.color + "'>" +
-		"<span class='user-status'>" + this.status + "</span>" +
+		"<span class='user-status'>" + status_names[this.status] + "</span>" +
 		"<span class='user-name'>" + this.name + "</span></span>";
 }
 

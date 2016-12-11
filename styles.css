@@ -7,6 +7,11 @@ body,html {
 	font-family: monospace;
 }
 
+.desktop-area a {
+	font-weight: bold;
+	color: #9c9c9c;
+}
+
 a:hover {
 	color: white;
 }

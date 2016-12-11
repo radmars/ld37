@@ -6,6 +6,7 @@ var Room = function() {
 		minWidth: 500,
 		minHeight: 500,
 		height: 500,
+		width: 800,
 		autoOpen: false,
 		appendTo: $('.desktop-area'),
 		beforeClose: function() {
@@ -15,6 +16,22 @@ var Room = function() {
 
 	this.users = []
 	this.messages = [];
+
+	this.dialog.on('click', '.inviter', this.inviteRandomMook.bind(this));
+}
+
+Room.prototype.inviteRandomMook = function() {
+	var user;
+	if(Math.random() > .5) {
+		user = new User();
+	}
+	else {
+		user = new UserLurker();
+	}
+	if(Math.random() > .5) {
+		user.op();
+	}
+	this.addUser(user);
 }
 
 Room.prototype.show = function() {
@@ -58,9 +75,17 @@ Room.prototype.kick = function(user, by) {
 }
 
 Room.prototype.op = function(user, by) {
+	user.op();
 	this.addInternal("<div class='kick-line'>" +
 		"User " + user.nameString() +
 		" got ops from " + by + "</div>"
+	);
+	this.updateUserListItem(user);
+}
+
+Room.prototype.updateUserListItem = function(user) {
+	$('#' + user.id + '-user-entry').html(
+		this.getUserListElementContent(user)
 	);
 }
 
@@ -73,21 +98,36 @@ Room.prototype.removeUser = function(user) {
 	window.gameState.removeUpdater(user);
 }
 
+Room.prototype.getUserListElementContent = function(user) {
+	return user.nameString() +
+		" <span class='controls'>" +
+		"[<a href='#' class='kicker'>K/B</a>]" +
+		"[<a href='#' class='opper'>op</a>]" +
+		"</span>";
+}
+
 Room.prototype.addUser = function(user) {
 	this.users.push(user);
 	window.gameState.addUpdater(user);
 	var element = $("<li id='" + user.id + "-user-entry'>" +
-		user.nameString() +
-		" <span class='controls'>" +
-		"[<a href='#' class='kicker'>K/B</a>]" +
-		"[<a href='#' class='opper'>op</a>]" +
-		"</span></li>"
+		this.getUserListElementContent(user) + "</li>"
 	);
+
+	jQuery.data(element[0], 'user', user);
 
 	jQuery('.kicker', element).click(this.kick.bind(this, user, "RadMars"));
 	jQuery('.opper', element).click(this.op.bind(this, user, "RadMars"));
 
-	$('#user-list').append(element)
+	var list = $('#user-list');
+	list.append(element)
+
+	var li = $('#user-list li');
+	li.sort(function(e1, e2) {
+		var u1 = jQuery.data(e1, "user");
+		var u2 = jQuery.data(e2, "user");
+		return u1.compare(u2);
+	}).appendTo(list);
+
 	var area = $('#chat-area');
 	area.append("<div class='join-line'>" +
 		"User " + user.nameString() +

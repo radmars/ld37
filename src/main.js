@@ -59,8 +59,10 @@ $( function() {
 	window.gameState = new Game()
 	window.gameState.start()
 
+	window.gameState.room.show();
 	window.gameState.downloader = new DownloadDialog()
 	window.gameState.addUpdater(window.gameState.downloader);
+	/*
 	window.gameState.downloader.start("IRC Client.exe", function() {
 		window.gameState.downloader.extra("All done!");
 		window.setTimeout(function() {
@@ -69,20 +71,11 @@ $( function() {
 		}, 1000);
 		console.log("Download finished");
 	});
+	*/
 
 	// Testing stuff
 	$('#fake-join-button').click(function() {
-		var user;
-		if(Math.random() > .5) {
-			user = new User();
-		}
-		else {
-			user = new UserLurker();
-		}
-		if(Math.random() > .5) {
-			user.op();
-		}
-		window.gameState.room.addUser(user);
+		window.gameState.room.inviteRandomMook();
 	});
 
 	$('#fake-chat-button').click(function() {
