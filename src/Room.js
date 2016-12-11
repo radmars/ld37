@@ -1,6 +1,6 @@
 "use strict"
 
-var Room = function(downloader) {
+var Room = function(superuser, downloader) {
 	this.dialog = $( "#irc-dialog").dialog({
 		closeOnEscape: false,
 		minWidth: 500,
@@ -14,18 +14,24 @@ var Room = function(downloader) {
 		},
 	});
 
+	this.superuser = superuser;
+
 	this.users = []
 	this.messages = [];
 	this.downloader = downloader;
 
-	this.dialog.on('click', '.inviter', this.inviteRandomMook.bind(this));
+	this.dialog.on('click', '.inviter',    this.inviteRandomMook.bind(this));
 	this.dialog.on('click', '.downloader', this.startDownload.bind(this));
 
 	var list = $('#user-list');
-	list.on('click', '.kicker', this.kick.bind(this, "RadMars"));
-	list.on('click', '.deopper', this.deop.bind(this, "RadMars"));
-	list.on('click', '.opper', this.op.bind(this, "RadMars"));
+	list.on('click', '.kicker',  userControlEvent.bind(null, this, 'kick'));
+	list.on('click', '.deopper', userControlEvent.bind(null, this, 'deop'));
+	list.on('click', '.opper',   userControlEvent.bind(null, this, 'op'));
+}
 
+function userControlEvent(room, cb, e) {
+	var user = jQuery.data(jQuery(e.target).closest("li")[0], "user")
+	room[cb].call(room, room.superuser, user);
 }
 
 Room.prototype.startDownload = function(e) {
@@ -84,33 +90,28 @@ Room.prototype.addMessage = function(user, message) {
 	);
 }
 
-Room.prototype.kick = function(by, e) {
-	var user = jQuery.data(jQuery(e.target).closest("li")[0], "user")
-
+Room.prototype.kick = function(by, user) {
 	this.addInternal("<div class='kick-line'>" +
 		"User " + user.nameString() +
-		" got booted from <span class='room-name'>#radwarez</span> by " +
-		by + "</div>"
+		" got booted from <span class='room-name'>#radwarez</span> by " + by.nameString() + "</div>"
 	);
 	this.removeUser(user);
 }
 
-Room.prototype.op = function(by, e) {
-	var user = jQuery.data(jQuery(e.target).closest("li")[0], "user")
+Room.prototype.op = function(by, user) {
 	user.op();
 	this.addInternal("<div class='op-line'>" +
 		"User " + user.nameString() +
-		" got promoted to " + user.statusName() + " status by " + by + "</div>"
+		" got promoted to " + user.statusName() + " status by " + by.nameString() + "</div>"
 	);
 	this.updateUserListItem(user);
 }
 
-Room.prototype.deop = function(by, e) {
-	var user = jQuery.data(jQuery(e.target).closest("li")[0], "user")
+Room.prototype.deop = function(by, user) {
 	user.deop();
 	this.addInternal("<div class='deop-line'>" +
 		"User " + user.nameString() +
-		" got demoted to " + user.statusName() + " status by " + by + "</div>"
+		" got demoted to " + user.statusName() + " status by " + by.nameString() + "</div>"
 	);
 	this.updateUserListItem(user);
 }

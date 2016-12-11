@@ -33,7 +33,7 @@ var Game = function() {
 	this.desktop = new Desktop()
 	this.downloader = new DownloadDialog(this.desktop)
 	this.addUpdater(this.downloader);
-	this.room = new Room(this.downloader);
+	this.room = new Room(this.player, this.downloader);
 }
 
 Game.prototype.update = function(now) {
