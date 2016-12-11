@@ -9,6 +9,10 @@ Array.prototype.randomElement = function() {
 	return this[Math.floor(Math.random() * this.length)];
 }
 
+String.prototype.paddingLeft = function (paddingValue) {
+	return String(paddingValue + this).slice(-paddingValue.length);
+};
+
 String.prototype.escapeHTML = function() {
 	var __entityMap = {
 		"&": "&amp;",

@@ -17,7 +17,6 @@ var Room = function(superuser, downloader) {
 	this.superuser = superuser;
 
 	this.users = []
-	this.messages = [];
 	this.downloader = downloader;
 
 	this.dialog.on('click', '.inviter',    this.inviteRandomMook.bind(this));
@@ -75,14 +74,11 @@ Room.prototype.addInternal = function(text) {
 }
 
 Room.prototype.addMessage = function(user, message) {
-	this.messages.push({
-		user: user,
-		message: message,
-	});
+	var spaces = "&nbsp;".repeat(11 - user.name.length);
 
 	this.addInternal(
 		jQuery("<div class='chat-line'></div>")
-			.append("[" + user.nameString() + "] ")
+			.append("[" + spaces + user.nameString() + "] ")
 			.append(
 				jQuery("<span class='message' style='color: " + user.color + "'></span>")
 					.append(message)
@@ -120,6 +116,7 @@ Room.prototype.updateUserListItem = function(user) {
 	$('#' + user.id + '-user-entry').html(
 		this.getUserListElementContent(user)
 	);
+	this.sortUserList();
 }
 
 Room.prototype.removeUser = function(user) {
@@ -153,13 +150,7 @@ Room.prototype.addUser = function(user) {
 
 	var list = $('#user-list');
 	list.append(element)
-
-	var li = $('#user-list li');
-	li.sort(function(e1, e2) {
-		var u1 = jQuery.data(e1, "user");
-		var u2 = jQuery.data(e2, "user");
-		return u1.compare(u2);
-	}).appendTo(list);
+	this.sortUserList();
 
 	this.addInternal(
 		jQuery("<div class='join-line'></div>")
@@ -168,4 +159,13 @@ Room.prototype.addUser = function(user) {
 				" joined <span class='room-name'>#radwarez</span>"
 			)
 	);
+}
+
+Room.prototype.sortUserList = function() {
+	var li = $('#user-list li');
+	li.sort(function(e1, e2) {
+		var u1 = jQuery.data(e1, "user");
+		var u2 = jQuery.data(e2, "user");
+		return u1.compare(u2);
+	}).appendTo($('#user-list'));
 }
