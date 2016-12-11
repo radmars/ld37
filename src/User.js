@@ -106,12 +106,21 @@ User.randomName = function() {
 }
 
 User.prototype.banter = function() {
-		window.gameState.room.addMessage(this, "Hello from " + Math.random());
+	if(
+		this.ChatData
+		&& this.ChatData.banter
+	) {
+
+		return User.randomElement(this.ChatData.banter);
+	}
+	else {
+		return "Hello from " + Math.random();
+	}
 }
 
 User.prototype.update = function(time) {
 	if(this.chatTimer <= 0) {
-		this.banter();
+		window.gameState.room.addMessage(this, this.banter());
 		this.startChatTimer();
 	}
 	else {
