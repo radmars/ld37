@@ -6,17 +6,6 @@ class RadUser extends User {
 		this.name = "RADMARS";
 		this.status = 3;
 	}
-
-	op() {
-	}
-
-	deop() {
-	}
-
 	update() {
-	}
-
-	canControl() {
-		return false;
 	}
 }

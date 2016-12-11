@@ -76,7 +76,7 @@ class User {
 	}
 
 	op() {
-		if(this.status < 2) {
+		if(this.status < 3) {
 			this.status++;
 		}
 	}
@@ -189,8 +189,16 @@ class User {
 		}
 	}
 
-	canControl() {
-		return true;
+	canControl(user) {
+		if(this.status >= user.status && this.status >= 2) {
+			return 1;
+		}
+	}
+
+	canPromote(user) {
+		if(this.status > user.status && this.status >= 2) {
+			return 1;
+		}
 	}
 }
 

@@ -71,25 +71,7 @@ Game.prototype.removeUpdater = function(u) {
 }
 
 $( function() {
-
 	window.gameState = new Game()
 	window.gameState.start()
-
-	// Testing stuff
-	$('#fake-join-button').click(function() {
-		window.gameState.room.inviteRandomMook();
-	});
-
-	$('#fake-chat-button').click(function() {
-		var user = window.gameState.room.users.randomElement();
-		window.gameState.room.addMessage( user, user.banter() );
-	});
-
-	$('#fake-download').click(function() {
-		var file = File.generateNewFile();
-		window.gameState.downloader.start(file, function() {
-		});
-	});
-
 } );
 

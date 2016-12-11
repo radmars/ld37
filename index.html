@@ -26,7 +26,7 @@
 	</head>
 	<body class='flex-column'>
 		<div class='desktop-area'>
-			<div id="irc-dialog" title="#radwarez on RadNet IRC network" class='flex-row'>
+			<div id="irc-dialog" title="#radwarez on RadNet IRC network" class='flex-row' style='display: none'>
 				<div id='chat-area'>
 					<div class='chat-line'>
 						<pre style="font: 10px/5px monospace;">
@@ -49,27 +49,26 @@ Welcome to <span class='room-name'>#radwarez</span> Commissar!
       # Rules of the Road
 
   1. In this room you can download some of the
-     rarest warez available to the RadNet.
+     rarest warez available on RadNet.
 
-  2. To gain access to new files, new users must
-     offer them up.
+  2. To gain access to new files, users must offer them up.
 
-  3. As the owner of the room, all of your files
-     are up for grab.
+  3. As the owner of the room, all of your files are up for grab.
 
   4. Beware of viruses!
 
-  5. Users can only post files when they have been
-     promoted to voice or higer status.
+  5. Users can only post files when they have been promoted to
+     voice or higer status.
 
-  6. Operators can invite, kick, promote and
-     demote other users.
+  6. Operators can invite, kick, promote and demote other users.
 
-  7. You, as creator, comissar, and "superuser"
-     cannot be kicked or demoted.
+  7. You, as creator, and comissar of <span class='room-name'>#radwarez</span>
+     start as a "superuser"
 
-  8. Your mission is to build a healthy community
-     and get all the hottest warez.
+  8. If you get kicked out of the room, the game is over.
+
+  8. Your mission is to build a healthy community and get all the
+     hottest warez.
 
   5. To get started, you should probably <a href='#' class='inviter'>invite</a>
      a friend.
@@ -79,17 +78,7 @@ Welcome to <span class='room-name'>#radwarez</span> Commissar!
 				</div>
 
 				<div id='user-area'>
-					Users<br />
-					<button id='fake-join-button'>
-						Fake join
-					</button><br />
-					<button id='fake-chat-button'>
-						Fake chat
-					</button><br />
-					<button id='fake-download'>
-						Fake download
-					</button><br />
-
+					Users [<a href='#' class='inviter'>invite random</a>]<br />
 					<ul id='user-list'>
 					</ul>
 				</div>
