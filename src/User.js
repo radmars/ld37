@@ -170,10 +170,10 @@ class User {
 		}
 
 		if(
-			this.ChatData
-			&& this.ChatData.banter
+			this.chatData
+			&& this.chatData.banter
 		) {
-			return this.ChatData.banter.randomElement();
+			return this.chatData.banter.randomElement();
 		}
 		else {
 			return jQuery("<span>Hello from " + Math.random() + "</span>");

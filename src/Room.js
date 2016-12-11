@@ -42,7 +42,7 @@ class Room {
 	}
 
 	inviteRandomMook() {
-		var user = newCall([User, UserLurker, Kicker].randomElement());
+		var user = newCall([User, UserLurker, UserTroll, Kicker].randomElement());
 		user.op();
 		this.addUser(user);
 	}
