@@ -9,12 +9,8 @@ UserLurker.prototype.banter = function() {
 }
 
 // Load and parse our data files.
-(function () {
-    $(document).ready(function () {
-        $.get('/data/chat/lurker.yaml')
-        .done(function (data) {
-					UserLurker.prototype.ChatData = jsyaml.load(data);
-          console.log(UserLurker.prototype.ChatData);
-      });
-    });
-}());
+$.get('/data/chat/lurker.yaml')
+.done(function (data) {
+	UserLurker.prototype.ChatData = jsyaml.load(data);
+	console.log(UserLurker.prototype.ChatData);
+});
