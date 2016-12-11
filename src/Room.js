@@ -69,7 +69,7 @@ class Room {
 	}
 
 	notifyUsers(event, args) {
-		var users = this.users.slice
+		var users = this.users.slice()
 		for(var i = 0; i < users.length; i++) {
 			users[i][event].call(users[i], args);
 		}
