@@ -1,0 +1,33 @@
+# Contains the basic chat messages sent by the class of user specified by the filetype.
+---
+banter:
+  - Banter message 1
+  - Banter message 2
+  - Banter message 3
+response:
+  new_friend:
+    - I lik u
+    - Friend message 2
+  new_rival:
+    - U r mean
+    - Rival message 2
+  respond_friend:
+    - I lik wut u sed 1
+    - I lik wut u sed 2
+  respond_rival:
+    - I respectfully disagree, sir.
+    - WTF r u smokin???
+  good_event:
+    - Happy days!
+  bad_event:
+    - Why god, why?
+  download_start:
+    - Am excite!!
+  download_end:
+    - Done!
+  upload_offer:
+    - Have a file!
+  become_happy:
+    - This chatroom is the best!
+  become_unhappy:
+    - This chatroom sucks!!!

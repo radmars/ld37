@@ -17,7 +17,6 @@ String.prototype.escapeHTML = function() {
 	});
 }
 
-
 var Game = function() {
 	this.lastTime = 0
 	this.updateCallback = this.update.bind(this)
@@ -73,7 +72,13 @@ $( function() {
 
 	// Testing stuff
 	$('#fake-join-button').click(function() {
-		var user = new User();
+		var user;
+		if(Math.random() > .5) {
+			user = new User();
+		}
+		else {
+			user = new UserLurker();
+		}
 		if(Math.random() > .5) {
 			user.op();
 		}
