@@ -1,9 +1,10 @@
 "use strict"
 
-var UserLurker = function() {
-	User.call(this);
+class UserLurker extends User {
+	constructor() {
+		super();
+	}
 }
-UserLurker.prototype = Object.create(User.prototype);
 
 // Load and parse our data files.
 $.get('/data/chat/lurker.yaml')

@@ -29,6 +29,7 @@ var Game = function() {
 	this.updateCallback = this.update.bind(this)
 	this.updaters = []
 
+	this.player = new RadUser();
 	this.desktop = new Desktop()
 	this.downloader = new DownloadDialog(this.desktop)
 	this.addUpdater(this.downloader);
@@ -49,6 +50,7 @@ Game.prototype.update = function(now) {
 }
 
 Game.prototype.start = function() {
+	this.room.addUser(this.player);
 	this.room.show();
 	window.requestAnimationFrame(this.updateCallback)
 }
@@ -69,12 +71,6 @@ $( function() {
 	window.gameState = new Game()
 	window.gameState.start()
 
-	/*
-	window.gameState.downloader.start("IRC Client.exe", function() {
-		window.gameState.room.show();
-	});
-	*/
-
 	// Testing stuff
 	$('#fake-join-button').click(function() {
 		window.gameState.room.inviteRandomMook();
@@ -88,7 +84,6 @@ $( function() {
 	$('#fake-download').click(function() {
 		var file = File.generateNewFile();
 		window.gameState.downloader.start(file, function() {
-			window.gameState.desktop.addFile(file);
 		});
 	});
 
