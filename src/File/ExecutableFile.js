@@ -38,18 +38,22 @@ class ExecutableFile extends File {
 	static generateName() {
 		var names = [
 			'EscapeFromMiniMars',
-			'TenkoseiRobo',
-			'DeathDeathEvolution',
-			'Micromancer',
+			'TenkoseiRobo(SCeNe)',
+			'DeathDeathEvolution-0D4yR3l34s3',
+			'Micromancer_STEAM-LEAK',
 			'Protocol on Blinding Lazer Weapons',
-			'Flesh Mess',
+			'Flesh_Mess [SCaLPeL1911]',
 			'Velocitron',
-			'Attack on RadMars',
-			'Grim Gateway',
-			'The Brink',
-			'Space Janitor',
+			'Attack_on_RadMars-ROLODEX-RELEASE',
+			'Grim_Gateway',
+			'The.Brink',
+			'SpaceJanitor-CustodialMarine--DPY',
 			'Tessitron',
-			'The Uncertainty Principle',
+			'The.Uncertainty.Principle.HAX',
+			'iZotope.Bigfoot-LEAK-SCeNe',
+			'iZotope_Treasure_UNRELEASED',
+			'iZotope.Brozone.6.[dOwngrAdE]',
+			'RADEngine-LEAK[SCaLPeL1911]-RARE!!!',
 		]
 		return names.randomElement();
 	}
