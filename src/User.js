@@ -67,6 +67,9 @@ class User {
 		this.id = user_index++
 		this.name = name || User.randomName();
 		this.status = 0;
+		this.happiness = 5;
+		this.friends = {};
+		this.rivals = {};
 		this.color = (new RColor()).get(true)
 		this.startChatTimer();
 		console.log(this.name, " is a ", this.constructor.name);
@@ -83,19 +86,111 @@ class User {
 
 	// User who got kicked doesn't get this. They're already gone.
 	onKick(by, user) {
+		if (this.isFriend(user)) {
+			this.lessHappy(1);
+		}
+		else if (this.isRival(user)) {
+			this.moreHappy(1);
+		}
 	}
 
 	// Everyone gets this.
 	onOp(by, user) {
+		if (this.isSelf(user)) {
+			this.moreHappy(1);
+			this.makeFriend(user);
+		}
 	}
 
 	// Everyone gets this.
 	onDeop(by, user) {
+		if (this.isSelf(user)) {
+			this.lessHappy(1);
+			this.makeRival(user);
+		}
 	}
 
 	// User who left does not get this, they're already gone.
 	onLeave(user) {
+		if (this.isFriend(user)) {
+			this.lessHappy(1);
+		}
+		else if (this.isRival(user)) {
+			this.moreHappy(1);
+		}
 	}
+
+	////
+	// Code for managing user relationships.
+	////
+
+	// Friendship is a one-way-street; other user may not like this one.
+	makeFriend(user) {
+		this.friends[user.id] = 1;
+		// Kiss and make up
+		if (this.isRival(user)) {
+			this.unRival(user);
+		}
+	}
+
+	// Same with rivalry. Seriously dude? I don't even know you exist.
+	makeRival(user) {
+		this.rivals[user.id] = 1;
+		// I don't even know you anymore!
+		if (this.isFriend(user)) {
+			this.unFriend(user);
+		}
+	}
+
+	isFriend(user) {
+		if (this.friends[user.id]) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	isRival(user) {
+		if (this.rivals[user.id]) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	isSelf(user) {
+		if (this.id === user.id) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	unFriend(user) {
+		if (this.friends[user.id]) {
+			delete this.friends[user.id];
+		}
+	}
+	unRival(user) {
+		if (this.rivals[user.id]) {
+			delete this.rivals[user.id];
+		}
+	}
+
+	moreHappy(change) {
+		this.happiness += change;
+	}
+
+	lessHappy(change) {
+		this.happiness -= change;
+	}
+
+	////
+	//
+	////
 
 	startChatTimer() {
 		this.chatTimer = Math.random() * 10000;

@@ -68,10 +68,12 @@ class Room {
 		}
 	}
 
-	notifyUsers(event, args) {
+	notifyUsers(event) {
+		var args = Array.prototype.slice.call(arguments, 1);
+
 		var users = this.users.slice()
 		for(var i = 0; i < users.length; i++) {
-			users[i][event].call(users[i], args);
+			users[i][event].apply(users[i], args);
 		}
 	}
 
