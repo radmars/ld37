@@ -17,4 +17,5 @@ Desktop.prototype.addFile = function(file) {
 		.on('selectstart', false)
 		.dblclick(file.launch.bind(file));
 	this.desktop.append(element);
+	file.onDownloadFinished();
 }

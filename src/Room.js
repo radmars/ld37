@@ -78,7 +78,6 @@ class Room {
 	addMessage(user, message) {
 		var spaces = "&nbsp;".repeat(11 - user.name.length);
 
-		
 		this._addInternal(
 			jQuery("<div class='chat-line'></div>")
 			.append("[" + spaces + user.nameString() + "] ")

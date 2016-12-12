@@ -12,6 +12,9 @@ class File {
 		throw "Not implemented!";
 	}
 
+	onDownloadFinished() {
+	}
+
 	static generateNewFile() {
 		var types = [ExecutableFile, MusicFile, KeygenFile, TextFile]
 		var newType = types.randomElement();

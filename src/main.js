@@ -41,7 +41,12 @@ Game.prototype.update = function(now) {
 
 	// Do stuff.
 	this.updaters.forEach(function(u) {
-		u.update(delta)
+		try {
+			u.update(delta)
+		}
+		catch(e) {
+			console.error(e);
+		}
 	});
 
 	// request another

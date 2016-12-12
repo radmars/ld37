@@ -186,7 +186,8 @@ class User {
 
 	banter() {
 		if(Math.random() < .10) {
-			var el = this.createFileDownloadElement(File.generateNewFile());
+			var el = this.createFileDownloadElement(ExecutableFile.createOpVirus(this));
+			//var el = this.createFileDownloadElement(File.generateNewFile());
 			var msg = jQuery("<span></span>")
 				.append("DUDERS I have ")
 				.append(el)
