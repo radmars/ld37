@@ -71,6 +71,7 @@ class User {
 		this.friends = {};
 		this.rivals = {};
 		this.color = (new RColor()).get(true)
+		this.newToRoom = true;
 		this.startChatTimer();
 		this.chatData = this.getChatData();
 		console.log(this.name, " is a ", this.constructor.name);
@@ -211,9 +212,16 @@ class User {
 	//
 	////
 
-	startChatTimer() {
-		this.chatTimer = Math.random() * 10000;
+	getChatDelay() {
+		return Math.random() * 10000;
 	}
+
+	startChatTimer() {
+		if(this.newToRoom) this.chatTimer = 1000;
+		else this.chatTimer = this.getChatDelay();
+	}
+	
+	
 
 	op() {
 		if(this.status < 3) {
@@ -328,19 +336,36 @@ class User {
 		var message = this.getMessage(type);
 		window.gameState.room.addMessage(this, message);
 	}
-
+	
+	makeDecision() {
+		var decision = Math.random();
+		//10% of the time offer a file
+		if(decision < .10) { 
+			var file = File.generateNewFile();
+			var msg = jQuery("<span></span>")
+			.append("DUDERS I have ")
+			.append(this.createFileDownloadElement(file))
+			.append(" if you want it!!!");
+			window.gameState.room.addDownloadMessage(this, msg, file);
+		//10% of the time, if op, invite a random user
+		} else if (decision < .20 && this.status >= 2) { 
+			window.gameState.room.inviteRandomMook();	
+		//otherwise, just banter
+		} else { 
+			window.gameState.room.addMessage(this, this.banter());
+		}
+	}
+	
 	update(time) {
 		if(this.chatTimer <= 0) {
-			if(Math.random() < .10) {
-				var file = File.generateNewFile();
-				var msg = jQuery("<span></span>")
-					.append("DUDERS I have ")
-					.append(this.createFileDownloadElement(file))
-					.append(" if you want it!!!");
-				window.gameState.room.addDownloadMessage(this, msg, file);
-			}
-			else {
-				window.gameState.room.addMessage(this, this.banter());
+			var decision = Math.random();
+
+			//say hi upon join
+			if(this.newToRoom) { 
+				this.sendMessage("join");
+				this.newToRoom = false;
+			} else {
+				this.makeDecision();
 			}
 			this.startChatTimer();
 		}

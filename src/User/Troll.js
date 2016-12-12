@@ -9,7 +9,12 @@ class UserTroll extends User {
 		super.onKick(by, user)
 		this.makeFriend(by);
 	}
-
+	
+	// note html probably in message. everyone gets this.
+	onChatMessage(user, message) {
+		
+	}
+	
 	makeRival(user) {
 		super.makeRival(user);
 		window.setTimeout(this.postVirus.bind(this, user), Math.random() * 10000);
@@ -29,8 +34,15 @@ class UserTroll extends User {
 				'u all are stupid',
 				'this sux',
 				'is everyone here a nub?',
+				'op me i wanna invite some peeps',
+				'wtf why no one postin anythin',
 			],
 			response: {
+				join: [
+					'sup noobs',
+					'hi',
+					'yoooo',
+				],
 				new_kick_virus: [
 					'Sweet new file i just found: ',
 					'holy balls grab this one: ',
@@ -40,7 +52,7 @@ class UserTroll extends User {
 					'ur brains arent good enuf to feed my dog',
 				],
 				new_rival: [
-					'what a fucktard. Go crawl under your mom’spanties',
+					'what a fucktard. Go crawl under your mom’s panties',
 					'i wanna rip out your guts and feed them to my trash collectors mom',
 				],
 				respond_friend: [
@@ -68,6 +80,7 @@ class UserTroll extends User {
 				],
 				become_happy: [
 					'yall have shot for brainz!',
+					'lol, dis place rulez',
 				],
 				become_unhappy: [
 					'ive never seen a biger group of muthafukin bitches in my LIFE',

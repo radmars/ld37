@@ -64,6 +64,9 @@ class Room {
 	inviteRandomMook() {
 		var user = newCall([
 			// Probabilties are fun, aren't they?
+			UserLeech, UserLeech,
+			UserCourier, UserCourier,
+			UserButterfly, UserButterfly, UserButterfly,
 			UserLurker, UserLurker, UserLurker, UserLurker, UserLurker, UserLurker,
 			UserTroll, UserTroll, UserTroll,
 			Kicker,
@@ -278,6 +281,8 @@ class Room {
 				" joined <span class='room-name'>#radwarez</span>"
 			)
 		);
+		
+		
 	}
 
 	sortUserList() {

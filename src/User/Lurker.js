@@ -12,8 +12,8 @@ class UserLurker extends User {
 		}
 	}
 
-	startChatTimer() {
-		this.chatTimer = Math.random() * 70000 + 5000;
+	getChatDelay() {
+		return Math.random() * 70000 + 5000;
 	}
 
 	getChatData() {
@@ -24,6 +24,11 @@ class UserLurker extends User {
 				'Anyone know of any sick warez?',
 			],
 			response: {
+				join: [
+					'hi',
+					'hello',
+					'sup',
+				],
 				new_friend: [
 					'lol',
 					'ur funny',
@@ -31,10 +36,13 @@ class UserLurker extends User {
 				new_rival: [
 					'IGNORE',
 					'whateva',
+					'pft',
 				],
 				respond_friend: [
 					'+1',
 					':)',
+					'yup',
+					'haha',
 				],
 				respond_rival: [
 					'lol, whatevs',
@@ -42,9 +50,11 @@ class UserLurker extends User {
 				],
 				good_event: [
 					':D',
+					'sweet',
 				],
 				bad_event: [
 					':(',
+					'...',
 				],
 				download_start: [
 					'!',
@@ -54,12 +64,16 @@ class UserLurker extends User {
 				],
 				upload_offer: [
 					'something cool for yall',
+					'check it',
+					'look at this',
 				],
 				become_happy: [
 					'i dont normally say things like this but yall are great',
+					'this place is sweet',
 				],
 				become_unhappy: [
 					'... ... ...',
+					'meh this place sux',
 				],
 			}
 		};
