@@ -38,7 +38,7 @@ a:hover {
 .start-bar {
 	border-top: 1px solid #ececec;
 	background: #ececec;
-	align-self: flex-end;
+	align-self: flex-start;
 	height: 32px;
 	width: 100%;
 }

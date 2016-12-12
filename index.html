@@ -27,6 +27,12 @@
 		<script src='src/Desktop.js'></script>
 	</head>
 	<body class='flex-column'>
+		<div class='start-bar'>
+			<button id='help-button'>HELP!</button>
+			<button id='credits-button'>Credits</button>
+			<button id='restart-button'>Restart</button>
+		</div>
+
 		<div class='desktop-area'>
 			<div id="irc-dialog" title="#radwarez on RadNet IRC network" class='flex-row' style='display: none'>
 				<div id='chat-area'>
@@ -70,7 +76,7 @@ Welcome to <span class='room-name'>#radwarez</span> Commissar!
   8. If you get kicked out of the room, the game is over.
 
   8. Your mission is to build a healthy community and get all the
-     hottest warez.
+     hottest warez circulated to users.
 
   5. To get started, you should probably <a href='#' class='inviter'>invite</a>
      a friend.
@@ -86,15 +92,62 @@ Welcome to <span class='room-name'>#radwarez</span> Commissar!
 				</div>
 			</div>
 
-			<div id="download-dialog" title="Downloads">
+			<div id="download-dialog" title="Downloads" style='display: none'>
 				Downloading: <span class='filename'>filename</span>
 				<div class='progress-bar'></div>
 				<div class='extra'></div>
 			</div>
-		</div>
 
-		<div class='start-bar'>
-			[start button]
+			<div id="virus-dialog" title="Virus downloaded!" style='display: none'>
+				<img src='img/virus_scan.png' />
+			</div>
+
+			<div id="credits-dialog" title="Credits" style='display: none'>
+				<pre>
+game created in ~2 days by:
+* adhesion  - design, music, programming
+* brendon   - design, graphics, programming
+* emarcotte - design, programming
+* sharang   - dialog / text
+* twillaims - design, programming
+			</div>
+
+			<div id="help-dialog" title="Help!" style='display: none'>
+				<h1>How to play</h1>
+				<p>
+					Your main goal is to get a large population of happy users
+					and downloading tons of great warez. Having trolls in the
+					room will make people want to leave.
+				</p>
+
+				<p>
+					People will not like being muted, but if they're muted they
+					can still contribute to total download score.
+				</p>
+				
+				<p>
+					Only a voiced user can post downloads.
+				</p>
+
+				<p>
+					Downloading viruses can cause you do have all sorts of
+					problems from giving out free ops, to kicking enemies or
+					inviting mysterious users. As far as we're aware, there's no
+					way to stop the viruses from taking affect!
+				</p>
+
+				<h1>Game play problems</h1>
+				<p>
+					If you're having trouble with the game loading properly (no
+					images, or music), try downloading the whole game from itch.io
+					or <a
+					href='http://radmars.com/ld37/download.zip'>radmars.com</a>
+				</p>
+				<p>
+					If the game seems stuck, try restarting it with the restart
+					button. It has some bugs :(
+				</p>
+			</div>
 		</div>
 	</body>
 </html>

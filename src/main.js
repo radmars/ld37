@@ -82,5 +82,24 @@ Game.prototype.removeUpdater = function(u) {
 $( function() {
 	window.gameState = new Game()
 	window.gameState.start()
+	$('#restart-button').click(function() {
+		window.location.reload();
+	});
+
+	$('#help-button').click(function() {
+		$('#help-dialog').dialog({
+			autoOpen: true,
+			width: 400,
+			modal: true,
+		});
+	});
+
+	$('#credits-button').click(function() {
+		$('#credits-dialog').dialog({
+			autoOpen: true,
+			width: "auto",
+			modal: true,
+		});
+	});
 } );
 
