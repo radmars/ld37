@@ -20,7 +20,9 @@ class Kicker extends User {
 				}).filter(function(u) {
 					return u != self && u != self.owner;
 				});
-				window.gameState.room.kick(this, kickable[kickable.length-1]);
+				if (kickable.length > 0) {
+					window.gameState.room.kick(this, kickable[kickable.length-1]);
+				}
 				this.kickingTimer = 400;
 			}
 		}
