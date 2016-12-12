@@ -218,6 +218,7 @@ class Room {
 		if(i >= 0) {
 			this.users.splice(i, 1);
 		}
+		this.toggleInviter();
 		window.gameState.removeUpdater(user);
 	}
 
@@ -244,9 +245,14 @@ class Room {
 		this.notifyUsers('onLeave', user);
 	}
 
+	toggleInviter() {
+		$('.inviter').toggle(this.users.length < 10);
+	}
+
 	_addUser(user) {
 		var max_users = $('#max-users');
 		this.users.push(user);
+		this.toggleInviter();
 
 		if((jQuery.data(max_users[0], 'users') || 0) < this.users.length) {
 			jQuery.data(max_users[0], 'users', this.users.length);
