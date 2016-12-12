@@ -126,6 +126,12 @@ class User {
 
 	// Friendship is a one-way-street; other user may not like this one.
 	makeFriend(user) {
+		if (this.isFriend(user)) {
+			// Nothing to do.
+			return;
+		}
+
+		this.sendMessage("new_friend");
 		this.friends[user.id] = 1;
 		// Kiss and make up
 		if (this.isRival(user)) {
@@ -135,6 +141,12 @@ class User {
 
 	// Same with rivalry. Seriously dude? I don't even know you exist.
 	makeRival(user) {
+		if (this.isRival(user)) {
+			// Nothing to do.
+			return;
+		}
+
+		this.sendMessage("new_rival");
 		this.rivals[user.id] = 1;
 		// I don't even know you anymore!
 		if (this.isFriend(user)) {
@@ -182,10 +194,12 @@ class User {
 
 	moreHappy(change) {
 		this.happiness += change;
+		this.sendMessage("good_event");
 	}
 
 	lessHappy(change) {
 		this.happiness -= change;
+		this.sendMessage("bad_event");
 	}
 
 	////
@@ -299,6 +313,24 @@ class User {
 		else {
 			return jQuery("<span>Hello from " + Math.random() + "</span>");
 		}
+	}
+
+	getMessage(type) {
+		if (
+			this.chatData
+			&& this.chatData.response
+			&& this.chatData.response[type]
+		) {
+			return this.chatData.response[type].randomElement();
+		}
+		else {
+			return "Generic " + type + " message.";
+		}
+	}
+
+	sendMessage(type) {
+		var message = this.getMessage(type);
+		window.gameState.room.addMessage(this, message);
 	}
 
 	update(time) {
