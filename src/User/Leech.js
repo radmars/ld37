@@ -16,6 +16,13 @@ class UserLeech extends User {
 		return Math.random() * 70000 + 5000;
 	}
 
+    downloadFinished(from, file) {
+        super.downloadFinished(from, file);
+        if(!file.virus) {
+            window.gameState.room.op(this, from);
+        }
+    }
+ 
 	getChatData() {
 		return {
 			banter: [

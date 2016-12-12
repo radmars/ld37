@@ -18,6 +18,7 @@ class File {
 		jQuery.data(total[0], 'total', new_value);
 		total.text(new_value);
 		if(new_value >= 10000 ) {
+            window.gameState.stop();
 			jQuery("<span title='Winner!'><h1>OMG you are so popular</h1>You got 10000 downloads.<br /> Might as well call it a win.</span>").dialog({
 				modal: true,
 				width: "auto",

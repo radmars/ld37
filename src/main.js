@@ -33,6 +33,7 @@ String.prototype.escapeHTML = function() {
 }
 
 var Game = function() {
+    this.stop = false;
 }
 
 Game.prototype.update = function(now) {
@@ -50,7 +51,9 @@ Game.prototype.update = function(now) {
 	});
 
 	// request another
-	window.requestAnimationFrame(this.updateCallback)
+    if(!this.stop) {
+        window.requestAnimationFrame(this.updateCallback)
+    }
 }
 
 Game.prototype.start = function() {
@@ -77,6 +80,10 @@ Game.prototype.removeUpdater = function(u) {
 	if(i >= 0) {
 		this.updaters.splice(i, 1);
 	}
+}
+
+Game.prototype.stop = function() {
+    this.stop = true;
 }
 
 Game.prototype.restart = function() {
