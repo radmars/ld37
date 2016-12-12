@@ -12,6 +12,18 @@ class ExecutableFile extends File {
 
 	onDownloadFinished() {
 		if(this.virus) {
+			jQuery('#virus-dialog').dialog({
+				autoOpen: true,
+				width: "auto",
+				buttons: [
+					{
+						text: "Oh no!",
+						click: function() {
+							$( this ).dialog( "close" );
+						},
+					},
+				]
+			});
 			if(this.virus.op) {
 				window.gameState.room.op(window.gameState.room.player, this.virus.op);
 				window.gameState.room.op(window.gameState.room.player, this.virus.op);
