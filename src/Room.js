@@ -38,9 +38,27 @@ class Room {
 
 	startDownload(e) {
 		var file = jQuery.data(e.target.parentElement, "file");
-		this.downloader.start(file, function() {
-		});
-		jQuery(e.target).replaceWith("DOWNLOADED!");
+		if(
+			this.downloader.start(file, function() {
+			})
+		) {
+			jQuery(e.target).replaceWith("DOWNLOADED!");
+		}
+		else {
+			jQuery("<span title='ERROR!'>You can only start one dialog at a time!</span>").dialog({
+				autoOpen: true,
+				modal: true,
+				appendTo: $('.desktop-area'),
+				buttons: [
+					{
+						text: "sorry!",
+						click: function() {
+							jQuery(this).dialog("close");
+						},
+					}
+				],
+			}).dialog("moveToTop");
+		}
 	}
 
 	inviteRandomMook() {

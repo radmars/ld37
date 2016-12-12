@@ -5,7 +5,6 @@ var DownloadDialog = function(desktop) {
 		resizable: false,
 		height: "auto",
 		width: 400,
-		modal: true,
 		appendTo: $('.desktop-area'),
 		autoOpen: false,
 	});
@@ -14,14 +13,21 @@ var DownloadDialog = function(desktop) {
 }
 
 DownloadDialog.prototype.start = function(file, callback) {
-	this.total = 800;
-	this.tracker = 0;
-	this.currentFile = file;
-	this.dialog.dialog('open');
-	$('.filename', this.dialog).text(file.name);
-	this.progress.progressbar({value: this.tracker, max: this.total});
-	this.oncomplete = callback
-	this.extra();
+	if(!this.currentFile) {
+		this.total = 2800;
+		this.tracker = 0;
+		this.currentFile = file;
+		this.dialog.dialog('open');
+		$('.filename', this.dialog).text(file.name);
+		this.progress.progressbar({value: this.tracker, max: this.total});
+		this.oncomplete = callback
+		this.extra();
+		return true;
+	}
+	else {
+		return false;
+	}
+
 }
 
 DownloadDialog.prototype.close = function() {
