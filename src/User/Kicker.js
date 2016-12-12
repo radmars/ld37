@@ -28,3 +28,9 @@ class Kicker extends User {
 		}
 	}
 }
+
+// Load and parse our data files.
+$.get('/data/chat/Kicker.yaml')
+.done(function (data) {
+	Kicker.prototype.chatData = jsyaml.load(data);
+});
