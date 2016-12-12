@@ -140,6 +140,9 @@ class Room {
 					'</span>'
 				).dialog({
 					appendTo: $('.desktop-area'),
+					beforeClose: function() {
+						window.gameState.restart();
+					},
 					autoOpen: true,
 					modal: true,
 					buttons: [
@@ -242,7 +245,14 @@ class Room {
 	}
 
 	_addUser(user) {
+		var max_users = $('#max-users');
 		this.users.push(user);
+
+		if((jQuery.data(max_users[0], 'users') || 0) < this.users.length) {
+			jQuery.data(max_users[0], 'users', this.users.length);
+			max_users.text(this.users.length);
+		}
+
 		window.gameState.addUpdater(user);
 		var element = $("<li id='" + user.id + "-user-entry'>" +
 			this.getUserListElementContent(user) + "</li>"

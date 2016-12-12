@@ -17,5 +17,5 @@ Desktop.prototype.addFile = function(file) {
 		.on('selectstart', false)
 		.dblclick(file.launch.bind(file));
 	this.desktop.append(element);
-	file.onDownloadFinished(window.gameState.room.player);
+	file.finish(window.gameState.room.player);
 }

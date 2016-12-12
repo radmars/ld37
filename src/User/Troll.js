@@ -28,7 +28,7 @@ class UserTroll extends User {
 			banter: [
 				'u all are stupid',
 				'this sux',
-				'is everyone here a retard?',
+				'is everyone here a nub?',
 			],
 			response: {
 				new_kick_virus: [
@@ -58,7 +58,7 @@ class UserTroll extends User {
 					'i hate you all',
 				],
 				download_start: [
-					'cum at me, retards',
+					'cum at me, noob',
 				],
 				download_end: [
 					'lolz, this thing sux. Y wud you even?',

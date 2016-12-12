@@ -370,7 +370,7 @@ class User {
 		if(!file.virus) {
 			this.makeFriend(from);
 		}
-		file.onDownloadFinished(this);
+		file.finish(this);
 	}
 
 	getChatData() {
