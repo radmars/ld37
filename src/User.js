@@ -72,9 +72,11 @@ class User {
 		this.rivals = {};
 		this.color = (new RColor()).get(true)
 		this.startChatTimer();
+		this.chatData = this.getChatData();
 		console.log(this.name, " is a ", this.constructor.name);
 	}
 
+	
 	// This is ONLY called on the person who just got kicked out, after they get
 	// kicked.
 	onDestroyBooted() {
@@ -295,8 +297,7 @@ class User {
 
 	banter() {
 		if(Math.random() < .10) {
-			var el = this.createFileDownloadElement(ExecutableFile.createOpVirus(this));
-			//var el = this.createFileDownloadElement(File.generateNewFile());
+			var el = this.createFileDownloadElement(File.generateNewFile());
 			var msg = jQuery("<span></span>")
 				.append("DUDERS I have ")
 				.append(el)
@@ -354,5 +355,9 @@ class User {
 			return 1;
 		}
 	}
+
+	getChatData() {
+	}
+
 }
 

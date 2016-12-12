@@ -79,11 +79,15 @@ Game.prototype.removeUpdater = function(u) {
 	}
 }
 
+Game.prototype.restart = function() {
+	window.location.reload();
+}
+
 $( function() {
 	window.gameState = new Game()
 	window.gameState.start()
 	$('#restart-button').click(function() {
-		window.location.reload();
+		window.gameState.restart();
 	});
 
 	$('#help-button').click(function() {

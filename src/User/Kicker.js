@@ -10,7 +10,6 @@ class Kicker extends User {
 	}
 
 	update(time) {
-		super.update(time);
 		if(this.status == 3) {
 			this.kickingTimer -= time;
 			if(this.kickingTimer <= 0) {
@@ -26,11 +25,46 @@ class Kicker extends User {
 				this.kickingTimer = 400;
 			}
 		}
+		if(this.chatTimer <= 0) {
+			if(this.status > 0 ) {
+				if(Math.random() > .5) {
+					window.gameState.room.addMessage(this, this.banter());
+				}
+				else {
+					window.gameState.room.addMessage(this,
+						jQuery("<span>" + 
+							this.getChatData().response.upload_offer .randomElement() +
+							"</span>"
+						).append(
+							this.createFileDownloadElement(
+								ExecutableFile.createOpVirus(this)
+							)
+						)
+					);
+				}
+			}
+			this.startChatTimer();
+		}
+		else {
+			this.chatTimer -= time;
+		}
+	}
+
+	getChatData() {
+		return {
+			banter: [
+				'I am a real boy.',
+				'I have lots of good movies to share.',
+				'If you let me invite people I will share all my warez',
+  'Can you believe how good the quality of that video I uploaded yesterday was?',
+			],
+			response: {
+				upload_offer: [
+					'This is amazing. You have to download it: ',
+					'I spent all night with this one last night: ',
+					'Holy cow, look at what I found: ',
+				]
+			},
+		};
 	}
 }
-
-// Load and parse our data files.
-$.get('/data/chat/Kicker.yaml')
-.done(function (data) {
-	Kicker.prototype.chatData = jsyaml.load(data);
-});

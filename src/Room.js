@@ -62,14 +62,13 @@ class Room {
 	}
 
 	inviteRandomMook() {
-		var user = newCall([User, UserLurker, UserTroll, Kicker].randomElement());
+		var user = newCall([UserLurker, UserTroll, Kicker].randomElement());
 		user.op();
 		this._addUser(user);
 	}
 
 	show() {
 		this.dialog.dialog("open");
-
 	}
 
 	_addInternal(text) {
@@ -96,47 +95,73 @@ class Room {
 	}
 
 	addMessage(user, message) {
-		var spaces = "&nbsp;".repeat(11 - user.name.length);
+		if(user.status > 0) {
+			var spaces = "&nbsp;".repeat(11 - user.name.length);
 
-		this._addInternal(
-			jQuery("<div class='chat-line'></div>")
-			.append("[" + spaces + user.nameString() + "] ")
-			.append(
-				jQuery("<span class='message' style='color: " + user.color + "'></span>")
-				.append(message)
-			)
-		);
+			this._addInternal(
+				jQuery("<div class='chat-line'></div>")
+				.append("[" + spaces + user.nameString() + "] ")
+				.append(
+					jQuery("<span class='message' style='color: " + user.color + "'></span>")
+					.append(message)
+				)
+			);
 
-		this.notifyUsers('onChatMessage', user, message);
+			this.notifyUsers('onChatMessage', user, message);
+		}
 	}
 
 	kick(by, user) {
-		this._addInternal("<div class='kick-line'>" +
-			"User " + user.nameString() +
-			" got booted from <span class='room-name'>#radwarez</span> by " + by.nameString() + "</div>"
-		);
-		this._removeUser(user);
-		this.notifyUsers('onKick', by, user);
+		if(by.canControl(user)) {
+			this._addInternal("<div class='kick-line'>" +
+				"User " + user.nameString() +
+				" got booted from <span class='room-name'>#radwarez</span> by " + by.nameString() + "</div>"
+			);
+			this._removeUser(user);
+			this.notifyUsers('onKick', by, user);
+
+			if(user == this.player) {
+				$('<span title="GG">' +
+					'<h1>Aw, you got kicked!</h1>' +
+					'You lose :(' +
+					'</span>'
+				).dialog({
+					appendTo: $('.desktop-area'),
+					autoOpen: true,
+					modal: true,
+					buttons: [
+						{
+							text: "so sad :(",
+							click: function() {
+								window.gameState.restart();
+							},
+						}
+					],
+				}).dialog("moveToTop");
+			}
+		}
 	}
 
 	op(by, user) {
-		user.op();
-		this._addInternal("<div class='op-line'>" +
-			"User " + user.nameString() +
-			" got promoted to " + user.statusName() + " status by " + by.nameString() + "</div>"
-		);
+		if(by.canPromote(user)) {
+			user.op();
+			this._addInternal("<div class='op-line'>" +
+				"User " + user.nameString() +
+				" got promoted to " + user.statusName() + " status by " + by.nameString() + "</div>"
+			);
 
-		// If we're changing the local player then, well, we have to refresh the
-		// whole list.
-		if(user == this.player) {
-			this.refreshUserList();
-		}
-		else {
-			this.updateUserListItem(user);
-		}
-		this.sortUserList();
+			// If we're changing the local player then, well, we have to refresh the
+			// whole list.
+			if(user == this.player) {
+				this.refreshUserList();
+			}
+			else {
+				this.updateUserListItem(user);
+			}
+			this.sortUserList();
 
-		this.notifyUsers('onOp', by, user);
+			this.notifyUsers('onOp', by, user);
+		}
 	}
 
 	deop(by, user) {
