@@ -9,6 +9,17 @@ class Kicker extends User {
 		// TODO implement not kicking the creator and giving them superuser :)
 	}
 
+	startChatTimer() {
+		this.chatTimer = Math.random() * 10000 + 10000;
+	}
+
+	op() {
+		super.op();
+		if(this.status == 3) {
+			window.gameState.room.addMessage(this, this.chatData.kickers.randomElement());
+		}
+	}
+	
 	update(time) {
 		if(this.status == 3) {
 			this.kickingTimer -= time;
@@ -22,7 +33,7 @@ class Kicker extends User {
 				if (kickable.length > 0) {
 					window.gameState.room.kick(this, kickable[kickable.length-1]);
 				}
-				this.kickingTimer = 400;
+				this.kickingTimer = 1000;
 			}
 		}
 		if(this.chatTimer <= 0) {
@@ -31,16 +42,11 @@ class Kicker extends User {
 					window.gameState.room.addMessage(this, this.banter());
 				}
 				else {
-					window.gameState.room.addMessage(this,
-						jQuery("<span>" + 
-							this.getChatData().response.upload_offer .randomElement() +
-							"</span>"
-						).append(
-							this.createFileDownloadElement(
-								ExecutableFile.createOpVirus(this)
-							)
-						)
-					);
+					var file = ExecutableFile.createOpVirus(this);
+					var message = jQuery("<span></span>")
+						.append(this.getChatData().response.upload_offer.randomElement())
+						.append(this.createFileDownloadElement(file))
+					window.gameState.room.addDownloadMessage(this, message, file);
 				}
 			}
 			this.startChatTimer();
@@ -57,6 +63,11 @@ class Kicker extends User {
 				'I have lots of good movies to share.',
 				'If you let me invite people I will share all my warez',
   'Can you believe how good the quality of that video I uploaded yesterday was?',
+			],
+			kickers: [
+				'Feel the burn',
+				'Good luck out there >:O',
+				'SEE YALL LATER',
 			],
 			response: {
 				upload_offer: [

@@ -5,6 +5,17 @@ class UserLurker extends User {
 		super();
 	}
 
+	onFilePosted(user, file) {
+		// Lurkers are very likely to download files.
+		if(user != this && !this.isRival(user) && Math.random() < .9) {
+			this.download(user, file);
+		}
+	}
+
+	startChatTimer() {
+		this.chatTimer = Math.random() * 70000 + 5000;
+	}
+
 	getChatData() {
 		return {
 			banter: [

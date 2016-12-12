@@ -12,7 +12,7 @@ class File {
 		throw "Not implemented!";
 	}
 
-	onDownloadFinished() {
+	onDownloadFinished(user) {
 	}
 
 	static generateNewFile() {

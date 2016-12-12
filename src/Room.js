@@ -62,7 +62,12 @@ class Room {
 	}
 
 	inviteRandomMook() {
-		var user = newCall([UserLurker, UserTroll, Kicker].randomElement());
+		var user = newCall([
+			// Probabilties are fun, aren't they?
+			UserLurker, UserLurker, UserLurker, UserLurker, UserLurker, UserLurker,
+			UserTroll, UserTroll, UserTroll,
+			Kicker,
+		].randomElement());
 		user.op();
 		this._addUser(user);
 	}
@@ -94,6 +99,12 @@ class Room {
 		}
 	}
 
+	addDownloadMessage(user, message, file) {
+		if(this.addMessage(user, message)) {
+			this.notifyUsers('onFilePosted', user, file);
+		}
+	}
+
 	addMessage(user, message) {
 		if(user.status > 0) {
 			var spaces = "&nbsp;".repeat(11 - user.name.length);
@@ -108,7 +119,9 @@ class Room {
 			);
 
 			this.notifyUsers('onChatMessage', user, message);
+			return true;
 		}
+		return false;
 	}
 
 	kick(by, user) {

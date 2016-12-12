@@ -76,12 +76,6 @@ class User {
 		console.log(this.name, " is a ", this.constructor.name);
 	}
 
-	
-	// This is ONLY called on the person who just got kicked out, after they get
-	// kicked.
-	onDestroyBooted() {
-	}
-
 	// note html probably in message. everyone gets this.
 	onChatMessage(user, message) {
 	}
@@ -112,6 +106,13 @@ class User {
 		}
 	}
 
+	onFilePosted(user, file) {
+		// Average user not very likely to download file
+		if(user != this && !this.isRival(user) && Math.random() < .40) {
+			this.download(user, file);
+		}
+	}
+
 	// User who left does not get this, they're already gone.
 	onLeave(user) {
 		if (this.isFriend(user)) {
@@ -120,6 +121,8 @@ class User {
 		else if (this.isRival(user)) {
 			this.moreHappy(1);
 		}
+		delete this.rivals[user]
+		delete this.friends[user]
 	}
 
 	////
@@ -133,7 +136,7 @@ class User {
 			return;
 		}
 
-		this.sendMessage("new_friend");
+		//this.sendMessage("new_friend");
 		this.friends[user.id] = 1;
 		// Kiss and make up
 		if (this.isRival(user)) {
@@ -148,7 +151,7 @@ class User {
 			return;
 		}
 
-		this.sendMessage("new_rival");
+		//this.sendMessage("new_rival");
 		this.rivals[user.id] = 1;
 		// I don't even know you anymore!
 		if (this.isFriend(user)) {
@@ -196,12 +199,12 @@ class User {
 
 	moreHappy(change) {
 		this.happiness += change;
-		this.sendMessage("good_event");
+		//this.sendMessage("good_event");
 	}
 
 	lessHappy(change) {
 		this.happiness -= change;
-		this.sendMessage("bad_event");
+		//this.sendMessage("bad_event");
 	}
 
 	////
@@ -296,14 +299,6 @@ class User {
 	}
 
 	banter() {
-		if(Math.random() < .10) {
-			var el = this.createFileDownloadElement(File.generateNewFile());
-			var msg = jQuery("<span></span>")
-				.append("DUDERS I have ")
-				.append(el)
-				.append(" if you want it!!!");
-			return msg;
-		}
 
 		if(
 			this.chatData
@@ -336,7 +331,17 @@ class User {
 
 	update(time) {
 		if(this.chatTimer <= 0) {
-			window.gameState.room.addMessage(this, this.banter());
+			if(Math.random() < .10) {
+				var file = File.generateNewFile();
+				var msg = jQuery("<span></span>")
+					.append("DUDERS I have ")
+					.append(this.createFileDownloadElement(file))
+					.append(" if you want it!!!");
+				window.gameState.room.addDownloadMessage(this, msg, file);
+			}
+			else {
+				window.gameState.room.addMessage(this, this.banter());
+			}
 			this.startChatTimer();
 		}
 		else {
@@ -354,6 +359,18 @@ class User {
 		if(this.status > user.status && this.status >= 2) {
 			return 1;
 		}
+	}
+
+	download(from, file) {
+		console.log(this.name, " started downloading ", file.name, " from ", from.name);
+		window.setTimeout(this.downloadFinished.bind(this, from, file), Math.random() * 5000);
+	}
+
+	downloadFinished(from, file) {
+		if(!file.virus) {
+			this.makeFriend(from);
+		}
+		file.onDownloadFinished(this);
 	}
 
 	getChatData() {

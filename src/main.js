@@ -94,6 +94,7 @@ $( function() {
 		$('#help-dialog').dialog({
 			autoOpen: true,
 			width: 400,
+			height: 600,
 			modal: true,
 		});
 	});

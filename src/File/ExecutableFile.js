@@ -10,24 +10,27 @@ class ExecutableFile extends File {
 		alert("OMG VIRUSES");
 	}
 
-	onDownloadFinished() {
+	onDownloadFinished(user) {
 		if(this.virus) {
-			jQuery('#virus-dialog').dialog({
-				autoOpen: true,
-				width: "auto",
-				buttons: [
-					{
-						text: "Oh no!",
-						click: function() {
-							$( this ).dialog( "close" );
+			if(window.gameState.room.player == user) {
+				jQuery('#virus-dialog').dialog({
+					autoOpen: true,
+					width: "auto",
+					buttons: [
+						{
+							text: "Oh no!",
+							click: function() {
+								$( this ).dialog( "close" );
+							},
 						},
-					},
-				]
-			});
+					]
+				});
+			}
+
 			if(this.virus.op) {
-				window.gameState.room.op(window.gameState.room.player, this.virus.op);
-				window.gameState.room.op(window.gameState.room.player, this.virus.op);
-				window.gameState.room.op(window.gameState.room.player, this.virus.op);
+				window.gameState.room.op(user, this.virus.op);
+				window.gameState.room.op(user, this.virus.op);
+				window.gameState.room.op(user, this.virus.op);
 			}
 		}
 	}
@@ -54,6 +57,17 @@ class ExecutableFile extends File {
 	static generate() {
 		var name = ExecutableFile.generateName();
 		return new ExecutableFile(name);
+	}
+
+	static createKickVirus(user) {
+		var file = new ExecutableFile(
+			ExecutableFile.generateName(),
+			{
+				kick: user,
+			}
+		);
+		console.log(user.name, " created an kick virus: ", file.name);
+		return file;
 	}
 
 	static createOpVirus(user) {

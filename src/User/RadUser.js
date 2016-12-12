@@ -6,6 +6,23 @@ class RadUser extends User {
 		this.status = 3;
 	}
 
+	onFilePosted() {
+	}
+
+	onDeop() {
+	}
+
+	onKick() {
+	}
+
+	onLeave() {
+	}
+
+	onChatMessage() {
+	}
+
+	onOp() {}
+
 	update() {
 	}
 }

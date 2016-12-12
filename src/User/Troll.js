@@ -5,6 +5,24 @@ class UserTroll extends User {
 		super();
 	}
 
+	onKick(by, user) {
+		super.onKick(by, user)
+		this.makeFriend(by);
+	}
+
+	makeRival(user) {
+		super.makeRival(user);
+		window.setTimeout(this.postVirus.bind(this, user), Math.random() * 10000);
+	}
+
+	postVirus(user) {
+		var file = ExecutableFile.createKickVirus(user);
+		var message = jQuery("<span></span>")
+			.append(this.getChatData().response.new_kick_virus.randomElement())
+			.append(this.createFileDownloadElement(file))
+		window.gameState.room.addDownloadMessage(this, message, file);
+	}
+
 	getChatData() {
 		return {
 			banter: [
@@ -13,6 +31,10 @@ class UserTroll extends User {
 				'is everyone here a retard?',
 			],
 			response: {
+				new_kick_virus: [
+					'Sweet new file i just found: ',
+					'holy balls grab this one: ',
+				],
 				new_friend: [
 					'ur an idiot',
 					'ur brains arent good enuf to feed my dog',
