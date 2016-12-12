@@ -387,7 +387,6 @@ class User {
 	}
 
 	download(from, file) {
-		console.log(this.name, " started downloading ", file.name, " from ", from.name);
 		window.setTimeout(this.downloadFinished.bind(this, from, file), Math.random() * 5000);
 	}
 

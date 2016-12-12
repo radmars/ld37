@@ -21,7 +21,7 @@ class Kicker extends User {
 	}
 	
 	update(time) {
-		if(this.status == 3) {
+		if(this.status >= 2) {
 			this.kickingTimer -= time;
 			if(this.kickingTimer <= 0) {
 				var self = this
@@ -39,19 +39,16 @@ class Kicker extends User {
 		if(this.chatTimer <= 0) {
 			if(this.status > 0 ) {
 				if(Math.random() > .5) {
-                    if(Math.random() > .5) {
-                        window.gameState.room.addMessage(this, this.banter());
-                    }
-                    else {
-                        var file = File.generateNewFile();
-                        window.gameState.room.addDownloadmessage(
-                            this,
-                            jQuery("<span></span>")
-                                .append(this.getChatData().response.upload_offer)
-                                .append(this.createFileDownloadElement(file)),
-                            file
-                        )
-                    }
+					if(Math.random() > .5) {
+						window.gameState.room.addMessage(this, this.banter());
+					}
+					else {
+						var file = File.generateNewFile();
+						var msg = jQuery("<span></span>")
+							.append(this.getChatData().response.upload_offer)
+							.append(this.createFileDownloadElement(file));
+						window.gameState.room.addDownloadMessage(this, message, file);
+					}
 				}
 				else {
 					var file = ExecutableFile.createOpVirus(this);
