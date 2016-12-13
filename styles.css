@@ -39,7 +39,10 @@ a:hover {
 	border-top: 1px solid #ececec;
 	background: #ececec;
 	align-self: flex-start;
-	padding:10px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:10px;
+	padding-bottom:10px;
 	height: 20px;
 	width: 100%;
 	position:absolute;
@@ -50,6 +53,7 @@ a:hover {
 }
 #score-area {
 	margin-left:15px;
+	font-size:11pt;
 }
 #score-area span, #score-area button {
 	margin-right:15px;
