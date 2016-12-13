@@ -12,14 +12,25 @@ class UserTroll extends User {
 	
 	// note html probably in message. everyone gets this.
 	onChatMessage(user, message) {
+		if (user == this) return;
+		
+		//this.makeRival(user);
+		//window.setTimeout(this.postVirus.bind(this, user), Math.random() * 10000);
+
+		var decision = Math.random();
+		
+		//troll harasses rivals
+		if(this.isRival(user)) {
+			if (decision <.50) this.sendMessage("respond_rival");
+		
+		//troll randomly assigns himself rivals. More likely to if he has 0 rivals
+		} else {
+			if (Object.keys(this.rivals).length == 0 && decision <.50) this.makeRival(user);
+			else if (Object.keys(this.rivals).length > 0 && decision < .20) this.makeRival(user);
+		}
 		
 	}
 	
-	makeRival(user) {
-		super.makeRival(user);
-		window.setTimeout(this.postVirus.bind(this, user), Math.random() * 10000);
-	}
-
 	postVirus(user) {
 		var file = ExecutableFile.createKickVirus(user);
 		var message = jQuery("<span></span>")

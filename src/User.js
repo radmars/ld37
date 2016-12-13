@@ -72,6 +72,7 @@ class User {
 		this.rivals = {};
 		this.color = (new RColor()).get(true)
 		this.newToRoom = true;
+		this.messageQueued = false;
 		this.startChatTimer();
 		this.chatData = this.getChatData();
 		console.log(this.name, " is a ", this.constructor.name);
@@ -152,7 +153,7 @@ class User {
 			return;
 		}
 
-		//this.sendMessage("new_rival");
+		this.sendMessage("new_rival");
 		this.rivals[user.id] = 1;
 		// I don't even know you anymore!
 		if (this.isFriend(user)) {
@@ -333,8 +334,18 @@ class User {
 	}
 
 	sendMessage(type) {
-		var message = this.getMessage(type);
+		if(this.messageQueued) {
+			return;
+		} else {
+			var message = this.getMessage(type);
+			window.setTimeout(this.finishSendingMessage(message), message.length * 100);
+			this.messageQueued = true;
+		}
+	}
+	
+	finishSendingMessage(message) {
 		window.gameState.room.addMessage(this, message);
+		this.messageQueued = false;
 	}
 	
 	makeDecision() {
@@ -358,8 +369,7 @@ class User {
 	
 	update(time) {
 		if(this.chatTimer <= 0) {
-			var decision = Math.random();
-
+		
 			//say hi upon join
 			if(this.newToRoom) { 
 				this.sendMessage("join");
