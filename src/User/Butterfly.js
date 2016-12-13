@@ -16,6 +16,11 @@ class UserButterfly extends User {
 		return Math.random() * 3000 + 3000;
 	}
 
+	makeFriend(f) {
+		super.makeFriend(f);
+		window.gameState.room.op(this, f);
+	}
+
 	getChatData() {
 		return {
 			banter: [

@@ -13,6 +13,7 @@ class UserTroll extends User {
 	
 	// note html probably in message. everyone gets this.
 	onChatMessage(user, message) {
+		super.onChatMessage(user,message);
 		if (user == this) return;
 		
 		//this.makeRival(user);
