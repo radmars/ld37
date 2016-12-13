@@ -36,14 +36,15 @@ class UserLurker extends User {
 	getChatData() {
 		return {
 			banter: [
-				'Any sweet warez?',
+				'any sweet warez?',
 				'...',
-				'Anyone know of any sick warez?',
+				'anyone know of any sick warez?',
+                'havin fun',
+                'warez?',
 			],
 			response: {
 				join: [
 					'hi',
-					'hello',
 					'sup',
 				],
 				new_friend: [

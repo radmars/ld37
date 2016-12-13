@@ -58,7 +58,13 @@ class UserTroll extends User {
 				'is everyone here a nub?',
 				'op me i wanna invite some peeps',
 				'wtf why no one postin anythin',
+                'make me an op',
+                'i promise im not a troll',
 			],
+            opp_banter: [
+				'make me an op, plz?',
+                'make me an op!',
+                ],
 			response: {
 				join: [
 					'sup noobs',
@@ -99,6 +105,8 @@ class UserTroll extends User {
 				],
 				upload_offer: [
 					'wich of you morons wants this?',
+                    'n for my next trick',
+                    'which poor sucker wants a peice of this?'
 				],
 				become_happy: [
 					'yall have shot for brainz!',

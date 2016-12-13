@@ -15,7 +15,25 @@ var prefixes = [
 	'mrs',
 	'ms',
 	'hot',
-	'SSJ-'
+	'SSJ-',
+    'death',
+    'toy',
+    'pink',
+    'strange',
+    'dr',
+    'madam',
+    'sir',
+    'robotic',
+    'fluffy',
+    'hawt',
+    'hypersonic',
+    'subzero',
+    'burning',
+    'silver',
+    'drunk',
+    'professor',
+    'alien',
+    'cryptic',
 ];
 
 var postfixes = [
@@ -29,6 +47,15 @@ var postfixes = [
 	'-o',
 	'pants',
 	'fan',
+    'cule',
+    'esq',
+    'lover',
+    'killa',
+    'painter',
+    'feeder',
+    'puncher',
+    'muncher'
+    'coater',
 ]
 
 var names = [
@@ -44,6 +71,18 @@ var names = [
 	'boy',
 	'man',
 	'lamer',
+    'killa',
+    'gangsta',
+    'lady',
+    'girl',
+    'boy',
+    'princess',
+    'toy',
+    'sucka',
+    'leopard',
+    'alien',
+    'spider',
+    'lozenge',
 ];
 
 var status_token = [
