@@ -19,7 +19,7 @@ class UserLeech extends User { //Data hoarder. Obsessively downloads everything 
 			UserCourier, UserCourier,
 			UserButterfly,
 			UserLurker, UserLurker, UserLurker, UserLurker, UserLurker, UserLurker,
-			UserTroll, UserTroll,
+			UserTroll, UserTroll2, UserTroll3,
 		];
 	}
 

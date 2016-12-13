@@ -26,6 +26,7 @@ class UserLurker extends User {
 			UserButterfly, UserButterfly,
 			UserLurker, UserLurker, UserLurker, UserLurker, UserLurker, UserLurker,
 			UserTroll, UserTroll,
+			UserTroll2, UserTroll3,
 		];
 	}
 

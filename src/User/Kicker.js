@@ -68,7 +68,11 @@ class Kicker extends User {
 	getInviteList() {
 		return [
 			UserLurker,
+			UserLurker,
+			UserLurker,
 			UserTroll,
+			UserTroll2,
+			UserTroll3,
 		];
 	}
 

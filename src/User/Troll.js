@@ -46,7 +46,9 @@ class UserTroll extends User {
 			// Probabilties are fun, aren't they?
 			UserLeech, UserLeech, UserLeech, UserLeech, UserLeech,
 			UserLurker, UserLurker, UserLurker, UserLurker, UserLurker, UserLurker,
-			UserTroll, UserTroll, UserTroll, UserTroll, UserTroll,
+			UserTroll, UserTroll, UserTroll,
+			UserTroll2, UserTroll2, UserTroll2,
+			UserTroll3, UserTroll3, UserTroll3, Kicker,
 		];
 	}
 
