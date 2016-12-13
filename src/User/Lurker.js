@@ -12,6 +12,13 @@ class UserLurker extends User {
 		}
 	}
 
+	onChatMessage(user, message) {
+		super.onChatMessage(user, message);
+		if(user.troll) {
+			this.lessHappy(1.5);
+		}
+	}
+
 	getChatDelay() {
 		return Math.random() * 70000 + 5000;
 	}

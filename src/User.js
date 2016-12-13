@@ -206,8 +206,10 @@ class User {
 
 	lessHappy(change) {
 		this.happiness -= change;
-		//this.sendMessage("bad_event");
-	}
+		if(this.happiness < -5) {
+			window.gameState.room.leave(this);
+		}
+}
 
 	////
 	//

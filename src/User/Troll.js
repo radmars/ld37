@@ -3,6 +3,7 @@
 class UserTroll extends User {
 	constructor() {
 		super();
+		this.troll = true;
 	}
 
 	onKick(by, user) {

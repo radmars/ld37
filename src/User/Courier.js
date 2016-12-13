@@ -16,6 +16,13 @@ class UserCourier extends User {
 		return Math.random() * 3000 + 3000;
 	}
 
+	onChatMessage(user, message) {
+		super.onChatMessage(user, message);
+		if(user.troll) {
+			this.lessHappy(.5);
+		}
+	}
+
 	getChatData() {
 		return {
 			banter: [
