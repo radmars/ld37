@@ -6,7 +6,16 @@ class TextFile extends File {
 	}
 
 	launch() {
-		alert("Awesome text file here");
+		jQuery(
+			"<span>" +
+			"<img src='img/text.png' />" +
+			"</span>"
+		).dialog({
+			autoOpen: true,
+			title: this.name,
+			width: "auto",
+			appendTo: $(".desktop-area"),
+		});
 	}
 
 	static generateName() {

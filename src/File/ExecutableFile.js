@@ -7,7 +7,16 @@ class ExecutableFile extends File {
 	}
 
 	launch() {
-		alert("OMG VIRUSES");
+		jQuery(
+			"<span>" +
+			"<img src='img/text.png' />" +
+			"</span>"
+		).dialog({
+			autoOpen: true,
+			title: this.name,
+			width: "auto",
+			appendTo: $(".desktop-area"),
+		});
 	}
 
 	onDownloadFinished(user) {
@@ -49,7 +58,7 @@ class ExecutableFile extends File {
 			'The.Brink-XDeaTH-EDITION',
 			'SpaceJanitor-CustodialMarine--DPY',
 			'Tessitron-CRaCKeD',
-			'The.Uncertainty.Principle-HAX',
+			'The-Uncertainty-Principle-HAX',
 			'iZotope.Bigfoot-LEAK-SCeNe',
 			'iZotope_Treasure-UNRELEASED',
 			'iZotope.Brozone.6.[dOwngrAdE]',
