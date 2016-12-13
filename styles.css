@@ -39,10 +39,21 @@ a:hover {
 	border-top: 1px solid #ececec;
 	background: #ececec;
 	align-self: flex-start;
-	height: 32px;
+	padding:10px;
+	height: 20px;
 	width: 100%;
+	position:absolute;
+	bottom:0px;
 }
-
+.start-bar button {
+	margin-left:10px;
+}
+#score-area {
+	margin-left:15px;
+}
+#score-area span, #score-area button {
+	margin-right:15px;
+}
 #chat-area {
 	padding: 0;
 	margin: 0;
