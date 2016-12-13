@@ -362,7 +362,7 @@ class User {
 			window.gameState.room.addDownloadMessage(this, msg, file);
 		//10% of the time, if op, invite a random user
 		} else if (decision < .20 && this.status >= 2) { 
-			window.gameState.room.inviteRandomMook();	
+			window.gameState.room.inviteMookFromList(this.getInviteList());
 		//otherwise, just banter
 		} else { 
 			window.gameState.room.addMessage(this, this.banter());
@@ -407,6 +407,17 @@ class User {
 			this.makeFriend(from);
 		}
 		file.finish(this);
+	}
+
+	getInviteList() {
+		return [
+			// Probabilties are fun, aren't they?
+			UserLeech, UserLeech,
+			UserCourier, UserCourier,
+			UserButterfly, UserButterfly, UserButterfly,
+			UserLurker, UserLurker, UserLurker, UserLurker, UserLurker, UserLurker,
+			UserTroll, UserTroll, UserTroll
+		];
 	}
 
 	getChatData() {

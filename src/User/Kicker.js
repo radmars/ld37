@@ -65,6 +65,13 @@ class Kicker extends User {
 		}
 	}
 
+	getInviteList() {
+		return [
+			UserLurker,
+			UserTroll,
+		];
+	}
+
 	getChatData() {
 		return {
 			banter: [

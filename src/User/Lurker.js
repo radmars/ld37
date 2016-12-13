@@ -19,6 +19,16 @@ class UserLurker extends User {
 		}
 	}
 
+	getInviteList() {
+		return [
+			// Probabilties are fun, aren't they?
+			UserLeech, UserLeech,
+			UserButterfly, UserButterfly,
+			UserLurker, UserLurker, UserLurker, UserLurker, UserLurker, UserLurker,
+			UserTroll, UserTroll,
+		];
+	}
+
 	getChatDelay() {
 		return Math.random() * 70000 + 5000;
 	}

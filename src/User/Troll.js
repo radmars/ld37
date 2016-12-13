@@ -41,6 +41,15 @@ class UserTroll extends User {
 		window.gameState.room.addDownloadMessage(this, message, file);
 	}
 
+	getInviteList() {
+		return [
+			// Probabilties are fun, aren't they?
+			UserLeech, UserLeech, UserLeech, UserLeech, UserLeech,
+			UserLurker, UserLurker, UserLurker, UserLurker, UserLurker, UserLurker,
+			UserTroll, UserTroll, UserTroll, UserTroll, UserTroll,
+		];
+	}
+
 	getChatData() {
 		return {
 			banter: [
