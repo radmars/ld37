@@ -83,6 +83,8 @@ var names = [
     'alien',
     'spider',
     'lozenge',
+    'lucas',
+    'small',
 ];
 
 var status_token = [

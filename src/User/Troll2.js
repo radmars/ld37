@@ -34,6 +34,7 @@ class UserTroll2 extends User {
 			UserTroll, UserTroll, UserTroll,
 			UserTroll2, UserTroll2, UserTroll2,
 			UserTroll3, UserTroll3, UserTroll3,
+			Kicker, Kicker, Kicker,
 		];
 	}
 
