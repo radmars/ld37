@@ -95,6 +95,11 @@ class UserButterfly extends User {
 				become_unhappy: [
 					'I’m feeling kinda bummed out right now...',
 				],
+				receive_virus: [
+                    'NOO VIRUSES',
+                    'virus :(',
+                    'you sent a virus you pos',
+				],
 			}
 		};
 	}

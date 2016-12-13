@@ -118,6 +118,11 @@ class UserTroll3 extends User {
 				become_unhappy: [
                     'u all are stupid. none of u deserve my great software for free movies. yall will miss out when i leave cuz its only 99 cents!!!',
 				],
+				receive_virus: [
+                    'lol I got pwnt',
+                    'virus lol',
+                    'haxxed file',
+				],
 			}
 		}
 	}

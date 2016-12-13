@@ -88,6 +88,11 @@ class UserTroll2 extends User {
 				become_unhappy: [
                     'Who wants to chat? Im super interested in meetin new ppl! Im 18 from NYC and wanna learn all about different types of ppl. ',
 				],
+				receive_virus: [
+                    'lol I got pwnt',
+                    'virus lol',
+                    'haxxed file',
+				],
 			}
 		}
 	}

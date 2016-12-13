@@ -107,6 +107,11 @@ class UserLeech extends User { //Data hoarder. Obsessively downloads everything 
 					'this is the least sweet room ive ever been in. like the oposit of sweet. like unsweet. like bitter n shit',
 					'meh this place sux',
 				],
+				receive_virus: [
+                    'wtf, this file is a virus',
+                    'virus :(',
+                    'you sent a virus you pos',
+				],
 			}
 		};
 	}
