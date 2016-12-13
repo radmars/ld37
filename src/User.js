@@ -54,7 +54,7 @@ var postfixes = [
     'painter',
     'feeder',
     'puncher',
-    'muncher'
+    'muncher',
     'coater',
 ]
 

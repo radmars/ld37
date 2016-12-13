@@ -37,12 +37,11 @@ class UserTroll3 extends User {
                 'sellin some cheap awesum software',
                 'i got som sick new warez peeps! coming up soon!',
                 'my stuff is less than a $ but worth loads',
-                '$0.99 is all im asking for a lifetime of free moveez'
-
+                '$0.99 is all im asking for a lifetime of free moveez',
 			],
             opp_banter: [
 				'op, plz',
-                'if u make me an op, i can invite more cool peeps'
+                'if u make me an op, i can invite more cool peeps',
                 ],
 			response: {
 				join: [
@@ -54,13 +53,13 @@ class UserTroll3 extends User {
 				new_kick_virus: [
 					'Check out this file: ',
                     'sick warez dudes:',
-                    'this is cool, peeps:'
+                    'this is cool, peeps:',
                     'some free movies, on me',
 				],
 				new_friend: [
 
                     'hey, you want free new movies? I have this cool program. Only 99 cents!',
-                    'ur cool. I can get you free movies for a discount. like only 50 cents.','
+                    'ur cool. I can get you free movies for a discount. like only 50 cents.',
 
 				],
 				new_rival: [
@@ -89,8 +88,8 @@ class UserTroll3 extends User {
 					'wtf!!!!!',
 				],
 				download_start: [
-					'this luks awesum!''
-                    'almsot as exited about this as about the new Tomb Breaker moovee'
+					'this luks awesum!',
+                    'almsot as exited about this as about the new Tomb Breaker moovee',
 				],
 				download_end: [
 					'end scene!',
@@ -100,7 +99,7 @@ class UserTroll3 extends User {
                     'check this out dudes n dudettes!',
                     'this is cool, peeps!',
                     'have a free movie guyzzz',
-                    'ill give this one for freee but all my others are ONLY $0.99'
+                    'ill give this one for freee but all my others are ONLY $0.99',
 				],
 				become_happy: [
                     'yall are awesum!',

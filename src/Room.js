@@ -68,7 +68,7 @@ class Room {
 			UserCourier, UserCourier,
 			UserButterfly, UserButterfly, UserButterfly,
 			UserLurker, UserLurker, UserLurker, UserLurker, UserLurker, UserLurker,
-			UserTroll, UserTroll, UserTroll,
+			UserTroll, UserTroll2, UserTroll3,
 			Kicker,
 		]);
 	}
