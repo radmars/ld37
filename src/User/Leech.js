@@ -1,6 +1,6 @@
 "use strict"
 
-class UserLeech extends User {
+class UserLeech extends User { //Data hoarder. Obsessively downloads everything and is happy to suck up all available bandwidth
 	constructor() {
 		super();
 	}
@@ -10,6 +10,17 @@ class UserLeech extends User {
 		if(user != this && !this.isRival(user) && Math.random() < .9) {
 			this.download(user, file);
 		}
+	}
+
+	getInviteList() {
+		return [
+			// Probabilties are fun, aren't they?
+			UserLeech, UserLeech, UserLeech, UserLeech, UserLeech,
+			UserCourier, UserCourier,
+			UserButterfly,
+			UserLurker, UserLurker, UserLurker, UserLurker, UserLurker, UserLurker,
+			UserTroll, UserTroll,
+		];
 	}
 
 	getChatDelay() {
@@ -32,12 +43,16 @@ class UserLeech extends User {
 				'come at me with ur sweet software',
 				'whs got sick warez?',
 				'wtf why no one postin anythin',
+                'guys, lets not make this chatroom super lame n full of off-topic shit',
+                'home from work and i wanna download sweet sweet software',
+                'i promise im not a troll',
 			],
 			response: {
 				join: [
-					'yo',
+					'yoooo',
 					'whatup',
 					'sup',
+                    'yo!',
 				],
 				new_friend: [
 					'lol. Wt warez have you shared bro?',
@@ -58,17 +73,20 @@ class UserLeech extends User {
 					'fk off',
 					'WTF r u smokin???',
 					'if yr not here with sick warez, go jerk off somewhere else',
+                    'WTf? y would u say that?',
 				],
 				good_event: [
 					'sweet',
 					'SWEEEEEET!!!!!',
 					'yayaya',
+                    'booyah!',
 				],
 				bad_event: [
 					':(',
 					'wt. wtf',
 					'wtf',
 					'WTF!',
+                    'is everyun here a nub?',
 				],
 				download_start: [
 					'rdy for these new wares!!!!',

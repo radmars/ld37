@@ -12,6 +12,15 @@ class UserButterfly extends User {
 		}
 	}
 
+	getInviteList() {
+		return [
+			// Probabilties are fun, aren't they?
+			UserLeech,
+			UserButterfly, UserButterfly, UserButterfly,
+			UserLurker, UserLurker, UserLurker,
+		];
+	}
+
 	getChatDelay() {
 		return Math.random() * 3000 + 3000;
 	}
@@ -25,10 +34,20 @@ class UserButterfly extends User {
 		return {
 			banter: [
 				'Best thing after a long day of work is chatting with all you fine folk',
-				'so I had the most random day at work today. My boss is SERIOUSLY nuts!',
+				'So I had the most random day at work today. My boss is SERIOUSLY nuts!',
 				'How is everyone doing?',
-				'...hello?',
+				'What did you all think about the new ZegaMegaZordBot movie?',
+                'Okay this is kinda embarrassing, but does anyone know how to treat burns on your but? Sorry if this offends anyone!',
+                'Did everyone have a good day?',
+                'Tell me your wildest dreams, your deepest desires, your scariest nightmares, your fondest memories! Just, you kknow, tell me about yourselves!',
+                'I could MURDER a bowl of ramen right now. Or cold soba. Or udon. Anything long, squishy and slurpy, really. No, not like that, you perverts!',
 			],
+            
+            opp_banter: [
+				'By the way, if you want to make me an an operator, I would not mind that at all!',
+                'If you make me an op, I will take care of the trolls',
+                ],
+				
 			response: {
 				join: [
 					'Hi all!',
@@ -42,9 +61,10 @@ class UserButterfly extends User {
 				new_rival: [
 					'You don’t seem like a very nice person. Just an observation.',
 					'Look punk, have you ever thought that if you try being nice to people, they might be nice back to you? And the world will be better for it?',
+                    'You seem like a mean person'
 				],
 				respond_friend: [
-					'Seriously, you’re the life of this chatroom',
+					'Seriously, you’re the life of this chatroom!',
 					'haha! Couldn’t have said it better myself!',
 				],
 				respond_rival: [

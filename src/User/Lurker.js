@@ -19,6 +19,16 @@ class UserLurker extends User {
 		}
 	}
 
+	getInviteList() {
+		return [
+			// Probabilties are fun, aren't they?
+			UserLeech, UserLeech,
+			UserButterfly, UserButterfly,
+			UserLurker, UserLurker, UserLurker, UserLurker, UserLurker, UserLurker,
+			UserTroll, UserTroll,
+		];
+	}
+
 	getChatDelay() {
 		return Math.random() * 70000 + 5000;
 	}
@@ -26,14 +36,15 @@ class UserLurker extends User {
 	getChatData() {
 		return {
 			banter: [
-				'Any sweet warez?',
+				'any sweet warez?',
 				'...',
-				'Anyone know of any sick warez?',
+				'anyone know of any sick warez?',
+                'havin fun',
+                'warez?',
 			],
 			response: {
 				join: [
 					'hi',
-					'hello',
 					'sup',
 				],
 				new_friend: [

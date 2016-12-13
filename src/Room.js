@@ -62,7 +62,7 @@ class Room {
 	}
 
 	inviteRandomMook() {
-		var user = newCall([
+		this.inviteMookFromList([
 			// Probabilties are fun, aren't they?
 			UserLeech, UserLeech,
 			UserCourier, UserCourier,
@@ -70,7 +70,11 @@ class Room {
 			UserLurker, UserLurker, UserLurker, UserLurker, UserLurker, UserLurker,
 			UserTroll, UserTroll, UserTroll,
 			Kicker,
-		].randomElement());
+		]);
+	}
+
+	inviteMookFromList(list) {
+		var user = newCall(list.randomElement());
 		user.op();
 		this._addUser(user);
 	}

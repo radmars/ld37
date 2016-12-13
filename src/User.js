@@ -15,7 +15,25 @@ var prefixes = [
 	'mrs',
 	'ms',
 	'hot',
-	'SSJ-'
+	'SSJ-',
+    'death',
+    'toy',
+    'pink',
+    'strange',
+    'dr',
+    'madam',
+    'sir',
+    'robotic',
+    'fluffy',
+    'hawt',
+    'hypersonic',
+    'subzero',
+    'burning',
+    'silver',
+    'drunk',
+    'professor',
+    'alien',
+    'cryptic',
 ];
 
 var postfixes = [
@@ -29,6 +47,15 @@ var postfixes = [
 	'-o',
 	'pants',
 	'fan',
+    'cule',
+    'esq',
+    'lover',
+    'killa',
+    'painter',
+    'feeder',
+    'puncher',
+    'muncher'
+    'coater',
 ]
 
 var names = [
@@ -44,6 +71,18 @@ var names = [
 	'boy',
 	'man',
 	'lamer',
+    'killa',
+    'gangsta',
+    'lady',
+    'girl',
+    'boy',
+    'princess',
+    'toy',
+    'sucka',
+    'leopard',
+    'alien',
+    'spider',
+    'lozenge',
 ];
 
 var status_token = [
@@ -362,7 +401,7 @@ class User {
 			window.gameState.room.addDownloadMessage(this, msg, file);
 		//10% of the time, if op, invite a random user
 		} else if (decision < .20 && this.status >= 2) { 
-			window.gameState.room.inviteRandomMook();	
+			window.gameState.room.inviteMookFromList(this.getInviteList());
 		//otherwise, just banter
 		} else { 
 			window.gameState.room.addMessage(this, this.banter());
@@ -407,6 +446,17 @@ class User {
 			this.makeFriend(from);
 		}
 		file.finish(this);
+	}
+
+	getInviteList() {
+		return [
+			// Probabilties are fun, aren't they?
+			UserLeech, UserLeech,
+			UserCourier, UserCourier,
+			UserButterfly, UserButterfly, UserButterfly,
+			UserLurker, UserLurker, UserLurker, UserLurker, UserLurker, UserLurker,
+			UserTroll, UserTroll, UserTroll
+		];
 	}
 
 	getChatData() {
