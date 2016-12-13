@@ -42,6 +42,8 @@ class UserTroll2 extends User {
 		return {
 			banter: [
 				'Who wants to chat? Im super interested in meetin new ppl! Im 18 from NYC and wanna learn all about different types of ppl.',
+				'a/s/l??',
+				'a/s/l? 18/F/NYC here :)',
 			],
             opp_banter: [
 				'op, plz',
