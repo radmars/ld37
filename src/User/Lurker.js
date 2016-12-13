@@ -94,6 +94,11 @@ class UserLurker extends User {
 					'... ... ...',
 					'meh this place sux',
 				],
+				receive_virus: [
+                    'wtf, this file is a virus',
+                    'virus :(',
+                    'you sent a virus you pos',
+				],
 			}
 		};
 	}

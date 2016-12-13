@@ -441,11 +441,17 @@ class User {
 
 	download(from, file) {
 		window.setTimeout(this.downloadFinished.bind(this, from, file), Math.random() * 5000);
+		
 	}
 
 	downloadFinished(from, file) {
 		if(!file.virus) {
 			this.makeFriend(from);
+			this.moreHappy(1);
+		}else{
+			this.sendMessage("receive_virus");
+			this.makeRival(from);
+			this.lessHappy(3);
 		}
 		file.finish(this);
 	}

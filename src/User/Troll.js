@@ -117,6 +117,11 @@ class UserTroll extends User {
 				become_unhappy: [
 					'ive never seen a biger group of muthafukin bitches in my LIFE',
 				],
+				receive_virus: [
+                    'lol I got pwnt',
+                    'virus lol',
+                    'haxxed file',
+				],
 			}
 		}
 	}

@@ -106,6 +106,11 @@ class UserCourier extends User {
 				become_unhappy: [
 					'this chatroom sucks!!!',
 				],
+				receive_virus: [
+                    'wtf, this file is a virus',
+                    'virus :(',
+                    'you sent a virus you pos',
+				],
 			}
 		};
 	}
