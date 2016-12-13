@@ -33,7 +33,7 @@ class Kicker extends User {
 				if (kickable.length > 0) {
 					window.gameState.room.kick(this, kickable[kickable.length-1]);
 				}
-				this.kickingTimer = 1000;
+				this.kickingTimer = 4000;
 			}
 		}
 		if(this.chatTimer <= 0) {
