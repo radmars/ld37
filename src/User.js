@@ -397,9 +397,8 @@ class User {
 		if(decision < .10) { 
 			var file = File.generateNewFile();
 			var msg = jQuery("<span></span>")
-			.append("DUDERS I have ")
-			.append(this.createFileDownloadElement(file))
-			.append(" if you want it!!!");
+				.append(this.getChatData().response.upload_offer + " ")
+				.append(this.createFileDownloadElement(file))
 			window.gameState.room.addDownloadMessage(this, msg, file);
 		//10% of the time, if op, invite a random user
 		} else if (decision < .20 && this.status >= 2) { 
